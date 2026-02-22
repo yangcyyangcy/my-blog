@@ -9,7 +9,7 @@ export default async function Home() {
         <div>
             <section className="hero">
                 <h1 className="typewriter-container">
-                    你好，我是新晋博主
+                    你好，我是yancey
                     <span className="typewriter-cursor"></span>
                 </h1>
                 <p>
