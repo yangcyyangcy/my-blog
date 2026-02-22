@@ -2,8 +2,8 @@ import './globals.css'
 import Link from 'next/link'
 
 export const metadata = {
-  title: 'My Personal Blog',
-  description: 'A modern, minimalistic personal blog built with Next.js',
+  title: 'My Premium Blog',
+  description: 'A modern, luxurious personal blog built with Next.js',
 }
 
 export default function RootLayout({ children }) {
@@ -11,7 +11,7 @@ export default function RootLayout({ children }) {
     <html lang="zh-CN">
       <body>
         <header className="header">
-          <div className="container header-container">
+          <div className="header-container">
             <Link href="/" className="logo">
               博客
             </Link>
@@ -38,7 +38,7 @@ export default function RootLayout({ children }) {
 
         <footer className="footer">
           <div className="container">
-            <p>© {new Date().getFullYear()} My Blog. Powered by Next.js & Vercel.</p>
+            <p>© {new Date().getFullYear()} My Blog. Designed with precision & elegance.</p>
           </div>
         </footer>
       </body>
