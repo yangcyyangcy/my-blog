@@ -23,7 +23,7 @@ export default async function Home() {
                     <Link href="/blog" className="btn-primary">
                         阅读文章
                     </Link>
-                    <a href="https://github.com/yangcyyangcy" target="_blank" rel="noopener noreferrer" className="btn-outline">
+                    <a href="https://github.com/yanceyyancey" target="_blank" rel="noopener noreferrer" className="btn-outline">
                         GitHub
                     </a>
                 </div>
