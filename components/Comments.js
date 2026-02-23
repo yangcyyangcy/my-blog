@@ -13,9 +13,9 @@ export default function Comments() {
             // Giscus Configuration attributes
             script.src = 'https://giscus.app/client.js';
             script.setAttribute('data-repo', 'yanceyyancey/my-blog'); // Please replace with your actual repo
-            script.setAttribute('data-repo-id', 'R_kgDONRxyKg'); // Optional but recommended, auto-filled if repo is valid
+            script.setAttribute('data-repo-id', 'R_kgDORV_TOQ'); // Optional but recommended, auto-filled if repo is valid
             script.setAttribute('data-category', 'Announcements');
-            script.setAttribute('data-category-id', 'DIC_kwDONRxyKs4CkeVX');
+            script.setAttribute('data-category-id', 'DIC_kwDORV_TOc4Ckj-A');
             script.setAttribute('data-mapping', 'pathname');
             script.setAttribute('data-strict', '0');
             script.setAttribute('data-reactions-enabled', '1');
