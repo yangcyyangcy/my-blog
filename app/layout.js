@@ -53,7 +53,7 @@ export default function RootLayout({ children }) {
 
         <footer className="footer">
           <div className="container">
-            <p>© {new Date().getFullYear()} My Blog. Designed with precision & elegance.</p>
+            <p>© {new Date().getFullYear()} My Blog.</p>
           </div>
         </footer>
       </body>
