@@ -24,7 +24,7 @@ export default async function Post({ params }) {
         const postData = await getPostData(slug);
 
         return (
-            <article style={{ maxWidth: '750px', margin: '0 auto' }}>
+            <article className="container" style={{ maxWidth: '850px', margin: '0 auto', marginTop: 'calc(var(--nav-height) + 2rem)' }}>
                 <Link href="/blog" className="back-link">
                     <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><line x1="19" y1="12" x2="5" y2="12"></line><polyline points="12 19 5 12 12 5"></polyline></svg>
                     返回文章列表

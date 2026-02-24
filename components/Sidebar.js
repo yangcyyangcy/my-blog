@@ -1,0 +1,53 @@
+export default function Sidebar() {
+    return (
+        <div className="sidebar-container">
+            {/* 个人资料卡片 */}
+            <div className="sidebar-card profile-card">
+                <div className="profile-avatar">
+                    <img src="https://github.com/yanceyyancey.png" alt="yancey" />
+                </div>
+                <h3 className="profile-name">yancey</h3>
+                <p className="profile-bio">学无止境，不忘初心</p>
+                <div className="profile-stats">
+                    <div className="stat-item">
+                        <span className="stat-value">96</span>
+                        <span className="stat-label">文章</span>
+                    </div>
+                    <div className="stat-item">
+                        <span className="stat-value">75</span>
+                        <span className="stat-label">标签</span>
+                    </div>
+                    <div className="stat-item">
+                        <span className="stat-value">21</span>
+                        <span className="stat-label">分类</span>
+                    </div>
+                </div>
+                <div className="profile-social">
+                    <a href="https://github.com/yanceyyancey" target="_blank" rel="noopener noreferrer" className="social-link" title="GitHub">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path></svg>
+                    </a>
+                    <a href="#" className="social-link" title="Email">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg>
+                    </a>
+                </div>
+            </div>
+
+            {/* 公告卡片 */}
+            <div className="sidebar-card announcement-card">
+                <div className="card-header">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--accent)" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M22 17H2a3 3 0 0 0 3-3V9a7 7 0 0 1 14 0v5a3 3 0 0 0 3 3zm-8.27 4a2 2 0 0 1-3.46 0"></path></svg>
+                    <span>公告</span>
+                </div>
+                <div className="card-content">
+                    <p>欢迎来到 yancey 的个人博客！</p>
+                    <p style={{ marginTop: '0.5rem', color: 'var(--text-secondary)' }}>专注于保姆级教程，小白福利站。</p>
+                </div>
+            </div>
+
+            {/* 广告/插图位 */}
+            <div className="sidebar-card">
+                <img src="/gemini_hobbyist_hero.png" alt="Featured" style={{ width: '100%', borderRadius: 'var(--radius-sm)' }} />
+            </div>
+        </div>
+    );
+}
