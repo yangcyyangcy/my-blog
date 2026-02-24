@@ -1,0 +1,41 @@
+
+> next-blog@0.1.0 dev
+> next dev
+
+▲ Next.js 16.1.6 (Turbopack)
+- Local:         http://localhost:3000
+- Network:       http://192.168.1.151:3000
+- Environments: .env.local
+
+✓ Starting...
+✓ Ready in 580ms
+ GET /outstatic?error=github-relay-failed 200 in 1775ms (compile: 1191ms, render: 584ms)
+ GET /outstatic?error=github-relay-failed 200 in 88ms (compile: 13ms, render: 74ms)
+⨯ TypeError: Function.prototype.apply was called on #<Object>, which is an object and not a function
+    at ignore-listed frames
+ GET /api/outstatic/login 500 in 1138ms (compile: 1012ms, render: 126ms)
+⨯ TypeError: Function.prototype.apply was called on #<Object>, which is an object and not a function
+    at ignore-listed frames
+ GET /api/outstatic/login 500 in 58ms (compile: 8ms, render: 49ms)
+ GET /outstatic?error=github-relay-failed 200 in 18ms (compile: 4ms, render: 14ms)
+⨯ TypeError: Function.prototype.apply was called on #<Object>, which is an object and not a function
+    at ignore-listed frames
+ GET /api/outstatic/login 500 in 56ms (compile: 8ms, render: 48ms)
+ GET /outstatic?error=github-relay-failed 200 in 14ms (compile: 4ms, render: 11ms)
+⨯ TypeError: Function.prototype.apply was called on #<Object>, which is an object and not a function
+    at ignore-listed frames
+ GET /api/outstatic/login 500 in 85ms (compile: 20ms, render: 65ms)
+ GET /outstatic?error=github-relay-failed 200 in 27ms (compile: 10ms, render: 17ms)
+⨯ TypeError: Function.prototype.apply was called on #<Object>, which is an object and not a function
+    at ignore-listed frames
+ GET /api/outstatic/login 500 in 56ms (compile: 8ms, render: 48ms)
+ GET /outstatic?error=github-relay-failed 200 in 24ms (compile: 4ms, render: 20ms)
+⨯ TypeError: Function.prototype.apply was called on #<Object>, which is an object and not a function
+    at ignore-listed frames
+ GET /api/outstatic/login 500 in 28ms (compile: 1671µs, render: 27ms)
+ GET /outstatic?error=github-relay-failed 200 in 13ms (compile: 2ms, render: 11ms)
+⨯ TypeError: Function.prototype.apply was called on #<Object>, which is an object and not a function
+    at ignore-listed frames
+ GET /api/outstatic/login 500 in 56ms (compile: 6ms, render: 50ms)
+ GET /outstatic?error=github-relay-failed 200 in 13ms (compile: 3ms, render: 11ms)
+[?25h
