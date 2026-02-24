@@ -3,6 +3,8 @@ title: "Google Gemini 与 Antigravity：一个爱好者的日常使用体验"
 date: "2026-02-24"
 description: "从普通爱好者的视角，聊聊 AI 是如何悄悄提高我的学习与生活效率的。"
 author: "yancey"
+category: "Technology"
+tags: ["Google", "Gemini", "AI", "Productivity"]
 ---
 
 每次提到大语言模型（LLM）或者 AI，我们总会听到各种高大上的专业名词——诸如“万亿参数”、“Agentic Coding”、“System 2 思考”。但作为一名普通的技术爱好者，我不打算去拼这些参数。我更想和大家聊聊：**这些技术，究竟是怎么悄悄改变我的生活和小爱好的？**
