@@ -1,6 +1,6 @@
 {
-  "commit": "4423ff0120aa844bbf618c224c126a49b0565ca4",
-  "generated": "2026-02-25T07:07:14.216Z",
+  "commit": "827292ffa5b723b7d685c2e3ad8b87ce643586b2",
+  "generated": "2026-02-25T07:08:53.239Z",
   "metadata": [
     {
       "__outstatic": {
@@ -27,16 +27,16 @@
     },
     {
       "__outstatic": {
-        "commit": "4423ff0120aa844bbf618c224c126a49b0565ca4",
-        "hash": "3684916953",
-        "path": "undefined/ce-shi.md"
+        "commit": "827292ffa5b723b7d685c2e3ad8b87ce643586b2",
+        "hash": "1059209824",
+        "path": "outstatic/content/posts/ce-shi.md"
       },
       "author": {
         "name": "yancey",
         "picture": "https://avatars.githubusercontent.com/u/221816690?v=4"
       },
       "collection": "posts",
-      "publishedAt": "2026-02-25T07:54:59.033Z",
+      "publishedAt": "2026-02-25T07:56:33.763Z",
       "slug": "ce-shi",
       "status": "draft",
       "title": "测试"
