@@ -251,6 +251,7 @@ main {
   padding: 0.5rem 0.8rem;
   border-radius: var(--radius-sm);
   transition: var(--transition);
+  white-space: nowrap;
 }
 
 .nav-link:hover {
