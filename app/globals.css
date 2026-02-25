@@ -473,7 +473,7 @@ main {
   /* Animates from 0% to exactly 100% of the sizer's width */
   margin: 0;
   animation:
-    typing-loop 6s steps(15, end) infinite,
+    typing-loop 6s linear infinite,
     cursor-blink 0.8s step-end infinite;
 }
 
