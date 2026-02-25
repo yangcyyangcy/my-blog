@@ -208,14 +208,15 @@ main {
 }
 
 .header-container {
-  display: flex;
-  justify-content: space-between;
+  display: grid;
+  grid-template-columns: auto max-content;
   align-items: center;
+  justify-content: space-between;
   width: 100%;
   max-width: 1200px;
   margin: 0 auto;
   padding: 0 1.5rem;
-  flex-wrap: nowrap;
+  gap: 1rem;
 }
 
 .logo {
