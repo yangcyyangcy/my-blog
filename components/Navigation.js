@@ -34,9 +34,11 @@ export default function Navigation() {
         };
     }, [pathname]);
 
+    const isInverted = pathname === '/' && isAtTop;
+
     return (
         <>
-            <header className={`header ${isAtTop ? 'fade-in' : ''}`}>
+            <header className={`header ${isAtTop ? 'fade-in' : ''} ${isInverted ? 'nav-inverted' : ''}`}>
                 <div className="header-container">
                     <Link href="/" className="logo">
                         yancey
