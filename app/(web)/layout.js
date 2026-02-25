@@ -1,5 +1,6 @@
 import '../globals.css'
 import Link from 'next/link'
+import Navigation from '@/components/Navigation'
 
 export const metadata = {
   title: 'My Premium Blog',

@@ -6,59 +6,41 @@ import { usePathname } from 'next/navigation';
 
 export default function Navigation() {
     const pathname = usePathname();
-    const [isVisible, setIsVisible] = useState(true);
-    const [isAtTop, setIsAtTop] = useState(true);
+    const [isVisible, setIsVisible] = useState(false);
 
     useEffect(() => {
         let scrollTimeout;
-        let lastScrollY = window.scrollY;
 
+        // 1. 如果在文章详情页内（/blog/具体文章名），导航栏被彻底隐藏
+        const isArticlePage = pathname.startsWith('/blog/') && pathname.length > 6;
+        if (isArticlePage) {
+            setIsVisible(false);
+            return;
+        }
+
+        // 2. 首页及其他页面：初始静止状态为"隐藏"，只有滑动时出现，滑动停止2s后再次隐藏
         const handleScroll = () => {
-            const currentScrollY = window.scrollY;
-
-            // Check if we are at the very top of the page
-            setIsAtTop(currentScrollY < 10);
-
-            // Logic 1: On Post detail pages (/blog/xxx), we want to hide it unless scrolling up, or we can just hide it completely as requested.
-            // The prompt asks to "not show top nav on article pages". Let's hide it completely on /blog/* except /blog itself if it's a list.
-            const isArticlePage = pathname.startsWith('/blog/') && pathname.length > 6;
-
-            if (isArticlePage) {
-                // Instantly hide on article pages
-                setIsVisible(false);
-                return;
-            }
-
-            // Logic 2: On Homepage (and other pages), only show while scrolling, hide 2s after stop, AND hide when at the very top (still).
-            // Actually, "do not show navigation at rest on homepage, show when sliding, hide after 2s stop"
-
-            // We are scrolling! Show the navbar.
+            // 一旦监听到滚动，立马显示导航栏
             setIsVisible(true);
 
-            // Clear any existing timeout
+            // 如果之前有倒计时，先清空重置
             if (scrollTimeout) {
                 clearTimeout(scrollTimeout);
             }
 
-            // Set a timeout to hide the navbar after 2 seconds of no scrolling
+            // 重新开始 2 秒的倒计时，时间一到就隐藏它
             scrollTimeout = setTimeout(() => {
                 setIsVisible(false);
             }, 2000);
-
-            lastScrollY = currentScrollY;
         };
 
-        // Initial check for route-based blanking
-        const isArticlePage = pathname.startsWith('/blog/') && pathname.length > 6;
-        if (isArticlePage) {
-            setIsVisible(false);
-        } else {
-            // If on homepage and at top, should it be hidden initially? Yes, "at rest do not show"
-            setIsVisible(false);
-        }
+        // 初始装载时检查是否非文章页如果是也要默认隐藏（等待滚动）
+        setIsVisible(false);
 
+        // 监听滚动事件
         window.addEventListener('scroll', handleScroll, { passive: true });
 
+        // 组件卸载时清理定时器和监听
         return () => {
             window.removeEventListener('scroll', handleScroll);
             if (scrollTimeout) {
