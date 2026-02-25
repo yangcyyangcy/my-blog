@@ -1,7 +1,7 @@
 ---
 title: "测试"
 publishedAt: "2026-02-25T07:56:33.763Z"
-status: "draft"
+status: "published"
 author:
   name: "yancey"
   picture: "https://avatars.githubusercontent.com/u/221816690?v=4"

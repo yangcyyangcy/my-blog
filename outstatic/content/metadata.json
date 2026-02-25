@@ -1,6 +1,6 @@
 {
-  "commit": "827292ffa5b723b7d685c2e3ad8b87ce643586b2",
-  "generated": "2026-02-25T07:08:53.239Z",
+  "commit": "9c6cccbf923e594232888b122437435061b8c640",
+  "generated": "2026-02-25T07:09:35.018Z",
   "metadata": [
     {
       "__outstatic": {
@@ -27,8 +27,8 @@
     },
     {
       "__outstatic": {
-        "commit": "827292ffa5b723b7d685c2e3ad8b87ce643586b2",
-        "hash": "1059209824",
+        "commit": "9c6cccbf923e594232888b122437435061b8c640",
+        "hash": "949859361",
         "path": "outstatic/content/posts/ce-shi.md"
       },
       "author": {
@@ -38,7 +38,7 @@
       "collection": "posts",
       "publishedAt": "2026-02-25T07:56:33.763Z",
       "slug": "ce-shi",
-      "status": "draft",
+      "status": "published",
       "title": "测试"
     }
   ]
