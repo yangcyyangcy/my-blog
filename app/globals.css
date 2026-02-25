@@ -234,6 +234,7 @@ main {
 
 .nav-links {
   display: flex;
+  align-items: center;
   gap: 0.5rem;
   flex-wrap: nowrap;
   list-style: none;
