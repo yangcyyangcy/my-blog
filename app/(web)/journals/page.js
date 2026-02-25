@@ -1,5 +1,4 @@
 import { getSortedPostsData, getPostData } from '@/lib/posts';
-import JournalActions from '@/components/JournalActions';
 export const metadata = {
     title: '说说 - Journals',
 };
@@ -63,8 +62,6 @@ export default async function Journals() {
                                         style={{ fontSize: '1.1rem', lineHeight: 1.7, color: 'var(--text-primary)' }}
                                         dangerouslySetInnerHTML={{ __html: contentHtml }}
                                     />
-
-                                    <JournalActions slug={slug} />
                                 </div>
                             );
                         })
