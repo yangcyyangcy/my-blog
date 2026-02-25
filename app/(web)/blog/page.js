@@ -1,7 +1,5 @@
 import Link from 'next/link';
 import { getSortedPostsData } from '@/lib/posts';
-import Sidebar from '@/components/Sidebar';
-
 export const metadata = {
     title: 'Blog - 所有文章',
 };
@@ -37,9 +35,6 @@ export default async function Blog() {
                 </div>
             </div>
 
-            <aside className="sidebar">
-                <Sidebar />
-            </aside>
         </div>
     );
 }

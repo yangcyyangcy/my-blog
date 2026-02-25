@@ -1,4 +1,3 @@
-import Sidebar from '@/components/Sidebar';
 
 export const metadata = {
     title: '分类与标签 | yancey',
@@ -82,10 +81,6 @@ export default async function Categories() {
                     ))}
                 </div>
             </div>
-
-            <aside className="sidebar">
-                <Sidebar />
-            </aside>
         </div>
     );
 }

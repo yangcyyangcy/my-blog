@@ -1,6 +1,4 @@
 import { getSortedPostsData, getPostData } from '@/lib/posts';
-import Sidebar from '@/components/Sidebar';
-
 export const metadata = {
     title: '说说 - Journals',
 };
@@ -85,9 +83,7 @@ export default async function Journals() {
                 </div>
             </div>
 
-            <aside className="sidebar">
-                <Sidebar />
-            </aside>
         </div>
     );
 }
+

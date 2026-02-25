@@ -1,5 +1,4 @@
 import Link from 'next/link';
-import Sidebar from '@/components/Sidebar';
 import { getSortedPostsData } from '@/lib/posts';
 
 export const metadata = {
@@ -86,10 +85,6 @@ export default async function About() {
                     </div>
                 </div>
             </div>
-
-            <aside className="sidebar">
-                <Sidebar />
-            </aside>
         </div>
     );
 }

@@ -1,7 +1,5 @@
 import Link from 'next/link';
 import { getSortedPostsData } from '@/lib/posts';
-import Sidebar from '@/components/Sidebar';
-
 export const metadata = {
     title: '归档 - Timeline Archives',
 };
@@ -61,9 +59,6 @@ export default async function Archives() {
                 </div>
             </div>
 
-            <aside className="sidebar">
-                <Sidebar />
-            </aside>
         </div>
     );
 }

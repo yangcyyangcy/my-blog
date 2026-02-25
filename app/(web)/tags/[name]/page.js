@@ -1,7 +1,5 @@
 import Link from 'next/link';
 import { getSortedPostsData } from '@/lib/posts';
-import Sidebar from '@/components/Sidebar';
-
 export const revalidate = 60; // ISR Support
 
 export async function generateMetadata({ params }) {
@@ -78,9 +76,6 @@ export default async function TagPage({ params }) {
                 </div>
             </div>
 
-            <aside className="sidebar">
-                <Sidebar />
-            </aside>
         </div>
     );
 }
