@@ -753,3 +753,123 @@ main {
   font-size: 0.875rem;
   background: linear-gradient(to top, var(--bg-subtle), transparent);
 }
+
+/* ==========================================================================
+   TIMELINE ARCHIVES COMPONENT
+   ========================================================================== */
+.timeline-container {
+  position: relative;
+  padding-left: 20px;
+}
+
+.timeline-year-group {
+  margin-bottom: 3rem;
+  position: relative;
+}
+
+.timeline-year {
+  font-size: 1.8rem;
+  font-weight: 800;
+  color: var(--text-primary);
+  margin-bottom: 1.5rem;
+  position: relative;
+  padding-left: 1.5rem;
+}
+
+.timeline-year::before {
+  content: '';
+  position: absolute;
+  left: -20px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 6px;
+  height: 1.5rem;
+  background: var(--accent);
+  border-radius: 4px;
+}
+
+.timeline-posts {
+  position: relative;
+  border-left: 2px solid var(--border);
+  padding-left: 1.5rem;
+  margin-left: 5px;
+}
+
+.timeline-item {
+  position: relative;
+  margin-bottom: 2rem;
+  display: flex;
+  flex-direction: column;
+}
+
+.timeline-item:last-child {
+  margin-bottom: 0;
+}
+
+.timeline-dot {
+  position: absolute;
+  left: -1.5rem;
+  top: 0.5rem;
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background: var(--bg-primary);
+  border: 2px solid var(--accent);
+  transform: translateX(-50%);
+  box-shadow: 0 0 0 4px var(--bg-primary);
+  transition: all 0.2s ease;
+}
+
+.timeline-item:hover .timeline-dot {
+  background: var(--accent);
+  transform: translateX(-50%) scale(1.2);
+  box-shadow: 0 0 10px rgba(var(--accent-rgb), 0.4);
+}
+
+.timeline-content {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+.timeline-date {
+  font-family: var(--font-mono);
+  color: var(--text-muted);
+  font-size: 0.95rem;
+  min-width: 60px;
+}
+
+.timeline-title {
+  font-size: 1.15rem;
+  font-weight: 500;
+  color: var(--text-primary);
+  text-decoration: none;
+  transition: color 0.2s ease;
+}
+
+.timeline-title:hover {
+  color: var(--accent);
+}
+
+.timeline-category {
+  font-size: 0.75rem;
+  background: var(--bg-secondary);
+  color: var(--text-secondary);
+  padding: 0.2rem 0.6rem;
+  border-radius: 9999px;
+  border: 1px solid var(--border);
+  margin-left: auto;
+}
+
+@media (max-width: 768px) {
+  .timeline-content {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.5rem;
+  }
+
+  .timeline-category {
+    margin-left: 0;
+  }
+}

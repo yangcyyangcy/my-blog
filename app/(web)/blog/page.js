@@ -6,8 +6,8 @@ export const metadata = {
     title: 'Blog - 所有文章',
 };
 
-export default function Blog() {
-    const allPostsData = getSortedPostsData();
+export default async function Blog() {
+    const allPostsData = await getSortedPostsData();
 
     return (
         <div className="container layout-wrapper" style={{ marginTop: 'calc(var(--nav-height) + 2rem)' }}>
@@ -20,8 +20,8 @@ export default function Blog() {
                 </div>
 
                 <div className="post-list list-view">
-                    {allPostsData.map(({ id, date, title, description }) => (
-                        <Link href={`/blog/${id}`} key={id} className="post-card">
+                    {allPostsData.map(({ slug, date, title, description }) => (
+                        <Link href={`/blog/${slug}`} key={slug} className="post-card">
                             <div className="post-card-content">
                                 <h3>{title}</h3>
                                 <div className="date">

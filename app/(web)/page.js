@@ -3,7 +3,7 @@ import { getSortedPostsData } from '@/lib/posts';
 import Sidebar from '@/components/Sidebar';
 
 export default async function Home() {
-    const allPostsData = getSortedPostsData();
+    const allPostsData = await getSortedPostsData();
     const recentPosts = allPostsData.slice(0, 4);
 
     return (
@@ -32,8 +32,8 @@ export default async function Home() {
                         </div>
 
                         <div className="post-list list-view">
-                            {recentPosts.map(({ id, date, title, description }) => (
-                                <Link href={`/blog/${id}`} key={id} className="post-card">
+                            {recentPosts.map(({ slug, date, title, description }) => (
+                                <Link href={`/blog/${slug}`} key={slug} className="post-card">
                                     <div className="post-card-content">
                                         <h3>{title}</h3>
                                         <div className="date">

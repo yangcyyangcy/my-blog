@@ -1,7 +1,7 @@
 import { getSiteStats } from '@/lib/posts';
 
 export default async function Sidebar() {
-    const stats = getSiteStats();
+    const stats = await getSiteStats();
 
     return (
         <div className="sidebar-container">
