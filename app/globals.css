@@ -450,6 +450,49 @@ main {
   font-size: clamp(1.1rem, 4vw, 1.5rem);
   font-weight: 500;
   text-shadow: 0 2px 8px rgba(0, 0, 0, 0.5);
+
+  /* Typewriter effect */
+  display: inline-block;
+  overflow: hidden;
+  white-space: nowrap;
+  border-right: 2.5px solid rgba(255, 255, 255, 0.9);
+  margin: 0 auto;
+  text-align: left;
+  width: 15em;
+  /* Exactly 15 Chinese characters */
+  animation:
+    typing-loop 6s steps(15, end) infinite,
+    cursor-blink 0.8s step-end infinite;
+}
+
+@keyframes typing-loop {
+
+  0%,
+  15% {
+    width: 0;
+  }
+
+  40%,
+  60% {
+    width: 15em;
+  }
+
+  85%,
+  100% {
+    width: 0;
+  }
+}
+
+@keyframes cursor-blink {
+
+  0%,
+  100% {
+    border-color: rgba(255, 255, 255, 0.9);
+  }
+
+  50% {
+    border-color: transparent;
+  }
 }
 
 .scroll-down {
