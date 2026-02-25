@@ -126,7 +126,7 @@ export default function Translator() {
         setTimeout(() => {
             translateNode(document.body)
             observer.observe(document.body, { childList: true, subtree: true, characterData: true })
-        }, 100)
+        }, 1000)
 
         return () => {
             observer.disconnect()
