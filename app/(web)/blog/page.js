@@ -12,11 +12,21 @@ export default async function Blog() {
     return (
         <div className="container layout-wrapper" style={{ marginTop: 'calc(var(--nav-height) + 2rem)' }}>
             <div className="main-content">
-                <div style={{ padding: '1rem 0 2rem 0' }}>
-                    <h1 style={{ fontSize: '2.5rem', fontWeight: '800', marginBottom: '1rem', letterSpacing: '-0.04em' }}>所有文章</h1>
-                    <p style={{ color: 'var(--text-secondary)', fontSize: '1.05rem' }}>
-                        记录技术成长与生活感悟，分享有价值的内容。
-                    </p>
+                <div style={{ padding: '1rem 0 2rem 0', display: 'flex', alignItems: 'center', gap: '1rem' }}>
+                    <Link href="/" className="back-btn" style={{
+                        display: 'flex', alignItems: 'center', justifyContent: 'center',
+                        width: '40px', height: '40px', borderRadius: '50%',
+                        background: 'var(--bg-secondary)', color: 'var(--text-secondary)',
+                        textDecoration: 'none', transition: 'all 0.2s ease', flexShrink: 0
+                    }}>
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><line x1="19" y1="12" x2="5" y2="12"></line><polyline points="12 19 5 12 12 5"></polyline></svg>
+                    </Link>
+                    <div>
+                        <h1 style={{ fontSize: '2.5rem', fontWeight: '800', marginBottom: '0.2rem', letterSpacing: '-0.04em' }}>所有文章</h1>
+                        <p style={{ color: 'var(--text-secondary)', fontSize: '1.05rem', margin: 0 }}>
+                            记录技术成长与生活感悟，分享有价值的内容。
+                        </p>
+                    </div>
                 </div>
 
                 <div className="post-list">
