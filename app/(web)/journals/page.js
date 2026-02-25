@@ -5,6 +5,8 @@ export const metadata = {
     title: '说说 - Journals',
 };
 
+export const revalidate = 60; // Regenerate every 60 seconds
+
 // We will fetch all posts, filter by category='说说' or 'Journal', and then hydrate their full HTML content
 export default async function Journals() {
     const allPostsData = await getSortedPostsData();

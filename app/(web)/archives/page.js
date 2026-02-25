@@ -6,6 +6,8 @@ export const metadata = {
     title: '归档 - Timeline Archives',
 };
 
+export const revalidate = 60; // Regenerate every 60 seconds
+
 export default async function Archives() {
     const allPostsData = await getSortedPostsData();
 

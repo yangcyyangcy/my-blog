@@ -2,6 +2,8 @@ import Link from 'next/link';
 import { getSortedPostsData } from '@/lib/posts';
 import Sidebar from '@/components/Sidebar';
 
+export const revalidate = 60; // Regenerate every 60 seconds if Notion updates
+
 export default async function Home() {
     const allPostsData = await getSortedPostsData();
     const recentPosts = allPostsData.slice(0, 4);

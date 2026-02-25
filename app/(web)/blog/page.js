@@ -6,6 +6,8 @@ export const metadata = {
     title: 'Blog - 所有文章',
 };
 
+export const revalidate = 60; // ISR for Notion updates
+
 export default async function Blog() {
     const allPostsData = await getSortedPostsData();
 
