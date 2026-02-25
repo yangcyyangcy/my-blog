@@ -134,7 +134,7 @@ main {
   animation: pageFadeIn 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
 }
 
-/* Two-column layout grid */
+/* Two-column layout grid - Mobile First Strategy */
 .layout-wrapper {
   display: flex;
   flex-direction: column;
@@ -143,16 +143,21 @@ main {
   margin: 0 auto;
 }
 
+.main-content {
+  flex: 1;
+  min-width: 0;
+  width: 100%;
+}
+
+.sidebar {
+  width: 100%;
+}
+
 @media (min-width: 992px) {
   .layout-wrapper {
     flex-direction: row;
     gap: 2rem;
     align-items: flex-start;
-  }
-
-  .main-content {
-    flex: 1;
-    min-width: 0;
   }
 
   .sidebar {
@@ -388,10 +393,11 @@ main {
   position: relative;
   z-index: 2;
   animation: pageFadeIn 1s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  padding: 0 1rem;
 }
 
 .hero-title {
-  font-size: 4rem;
+  font-size: clamp(2.5rem, 8vw, 4rem);
   font-weight: 900;
   letter-spacing: -0.02em;
   margin-bottom: 1rem;
@@ -399,7 +405,7 @@ main {
 }
 
 .hero-subtitle {
-  font-size: 1.5rem;
+  font-size: clamp(1.1rem, 4vw, 1.5rem);
   font-weight: 500;
   text-shadow: 0 2px 8px rgba(0, 0, 0, 0.5);
 }
@@ -568,17 +574,17 @@ main {
    Markdown Article Typography Pro
 ------------------------------------ */
 .article-header {
-  margin-bottom: 3.5rem;
-  padding-bottom: 2.5rem;
+  margin-bottom: clamp(2rem, 5vw, 3.5rem);
+  padding-bottom: clamp(1.5rem, 4vw, 2.5rem);
   border-bottom: 1px solid var(--border);
   text-align: center;
 }
 
 .article-title {
-  font-size: 3rem;
+  font-size: clamp(2rem, 6vw, 3rem);
   font-weight: 800;
   letter-spacing: -0.04em;
-  line-height: 1.1;
+  line-height: 1.2;
   margin-bottom: 1.5rem;
   color: var(--text-primary);
 }
@@ -588,7 +594,8 @@ main {
   display: flex;
   justify-content: center;
   align-items: center;
-  gap: 1rem;
+  flex-wrap: wrap;
+  gap: 0.5rem 1rem;
   font-size: 0.95rem;
   font-family: var(--font-mono);
 }
@@ -602,12 +609,12 @@ main {
 .markdown-content p {
   color: var(--text-primary);
   margin-bottom: 2rem;
-  font-size: 1.15rem;
+  font-size: clamp(1.05rem, 2vw, 1.15rem);
   line-height: 1.85;
 }
 
 .markdown-content h2 {
-  font-size: 2rem;
+  font-size: clamp(1.5rem, 4vw, 2rem);
   margin-top: 3.5rem;
   margin-bottom: 1.5rem;
   padding-bottom: 0.5rem;

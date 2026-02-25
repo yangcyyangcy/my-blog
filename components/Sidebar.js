@@ -48,10 +48,6 @@ export default async function Sidebar() {
                 </div>
             </div>
 
-            {/* 广告/插图位 */}
-            <div className="sidebar-card" style={{ padding: '0.75rem', backgroundColor: 'var(--bg-secondary)', borderColor: 'var(--bg-subtle)' }}>
-                <img src="/gemini_hobbyist_hero.png" alt="Featured" style={{ width: '100%', borderRadius: 'var(--radius-sm)', display: 'block' }} />
-            </div>
         </div>
     );
 }
