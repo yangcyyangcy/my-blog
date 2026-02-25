@@ -250,30 +250,38 @@ main {
   /* Slight white glow on hover */
 }
 
-.header-container {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  width: 100%;
-  padding: 0 1.5rem;
+@media (max-width: 640px) {
+  .header-container {
+    padding: 0 0.8rem;
+  }
+
+  .logo {
+    font-size: 1.1rem;
+  }
+
+  .nav-links {
+    gap: 0.2rem;
+  }
+
+  .nav-link {
+    font-size: 0.85rem;
+    padding: 0.4rem 0.5rem;
+  }
+
+  /* Make the search modal more usable on small screens */
+  .search-modal {
+    width: 95%;
+  }
+
+  .search-header {
+    padding: 1rem;
+  }
+
+  .search-input-wrapper {
+    padding: 0.3rem 0.8rem;
+  }
 }
 
-.logo {
-  font-weight: 800;
-  font-size: 1.25rem;
-  color: var(--text-primary);
-  letter-spacing: -0.03em;
-  background: var(--accent-gradient);
-  -webkit-background-clip: text;
-  background-clip: text;
-  -webkit-text-fill-color: transparent;
-  position: relative;
-}
-
-.nav-links {
-  display: flex;
-  gap: 0.5rem;
-}
 
 /* ------------------------------------
    Sidebar specific
@@ -518,21 +526,6 @@ main {
   opacity: 0.8;
 }
 
-.nav-link {
-  display: flex;
-  align-items: center;
-  gap: 0.3rem;
-  color: var(--text-primary);
-  font-weight: 600;
-  font-size: 0.95rem;
-  padding: 0.5rem 0.8rem;
-  border-radius: var(--radius-sm);
-  transition: var(--transition);
-}
-
-.nav-link:hover {
-  background-color: var(--glass-bg);
-}
 
 /* Enhanced Post List Cards */
 .post-list {
