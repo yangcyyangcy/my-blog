@@ -33,7 +33,7 @@ export default async function Home() {
                             </Link>
                         </div>
 
-                        <div className="post-list">
+                        <div className="post-list list-view">
                             {recentPosts.map(({ slug, date, title, description }) => (
                                 <Link href={`/blog/${slug}`} key={slug} className="post-card">
                                     <div className="post-card-content">
