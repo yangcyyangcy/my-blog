@@ -1,11 +1,11 @@
 {
-  "commit": "",
-  "generated": "2026-02-25T03:25:39.281Z",
+  "commit": "e017b467b427204b4a5671582df5b836a856408f",
+  "generated": "2026-02-25T03:26:08.681Z",
   "metadata": [
     {
       "__outstatic": {
-        "commit": "",
-        "hash": "3278450599",
+        "commit": "e017b467b427204b4a5671582df5b836a856408f",
+        "hash": "988371168",
         "path": "outstatic/content/_singletons/untitled.md"
       },
       "author": {
@@ -16,7 +16,7 @@
       "publishedAt": "2026-02-25T04:12:30.927Z",
       "slug": "untitled",
       "status": "published",
-      "title": ""
+      "title": "test"
     }
   ]
 }
