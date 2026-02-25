@@ -1,8 +1,12 @@
 ---
 title: "Google Gemini 与 Antigravity：一个爱好者的日常使用体验"
-date: "2026-02-24"
+status: 'published'
+author:
+  name: "yancey"
+slug: 'gemini-everyday-life'
 description: "从普通爱好者的视角，聊聊 AI 是如何悄悄提高我的学习与生活效率的。"
-author: "yancey"
+coverImage: ''
+publishedAt: "2026-02-24T00:00:00.000Z"
 category: "Technology"
 tags: ["Google", "Gemini", "AI", "Productivity"]
 ---

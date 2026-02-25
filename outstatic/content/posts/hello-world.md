@@ -1,8 +1,12 @@
 ---
 title: "我的第一篇博客文章"
-date: "2024-05-20"
+status: 'published'
+author:
+  name: "新晋博主"
+slug: 'hello-world'
 description: "这是使用 Next.js 构建的个人博客系统的第一篇文章。演示了 Markdown 解析、代码高亮和样式排版。"
-author: "新晋博主"
+coverImage: ''
+publishedAt: "2024-05-20T00:00:00.000Z"
 category: "Life"
 tags: ["Milestone", "Introduction"]
 ---

@@ -1,13 +1,17 @@
 ---
 title: "Cloudflare 与 Vercel 的绝佳配合，以及 Open Claw (Claude) 替代方案的探讨"
-date: "2026-02-23"
+status: 'published'
+author:
+  name: "yancey"
+slug: 'cloudflare-and-ai-alternatives'
 description: "深度解析现代前端部署中的黄金组合（Cloudflare + Vercel），并探讨大语言模型时代 Claude 系列的替代方案与技术架构。"
-author: "yancey"
+coverImage: ''
+publishedAt: "2026-02-23T00:00:00.000Z"
 category: "Technology"
 tags: ["AI", "Cloudflare", "Edge Computing"]
 ---
 
-在这篇文章里，我们将通过通俗易懂的方式，为您解答在建设现代个人博客和 Web 应用时，经常会遇到的两大技术焦点：**前端基建的网络架构（Cloudflare 与 Vercel 的关系）**，以及**后方驱动的人工智能大脑（Claude 及其替代品）**。
+在这个文章里，我们将通过通俗易懂的方式，为您解答在建设现代个人博客和 Web 应用时，经常会遇到的两大技术焦点：**前端基建的网络架构（Cloudflare 与 Vercel 的关系）**，以及**后方驱动的人工智能大脑（Claude 及其替代品）**。
 
 ---
 
