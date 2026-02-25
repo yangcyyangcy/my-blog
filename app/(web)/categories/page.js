@@ -49,7 +49,7 @@ export default async function Categories() {
                 </h2>
                 <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(200px, 1fr))', gap: '1rem', marginBottom: '3rem' }}>
                     {Object.entries(categories).map(([category, count]) => (
-                        <div key={category} className="category-card">
+                        <Link href={`/categories/${encodeURIComponent(category)}`} key={category} className="category-card" style={{ textDecoration: 'none', color: 'inherit' }}>
                             <span style={{ fontWeight: '500' }}>{category}</span>
                             <span style={{
                                 background: 'var(--bg-primary)',
@@ -58,7 +58,7 @@ export default async function Categories() {
                                 fontSize: '0.85rem',
                                 color: 'var(--text-secondary)'
                             }}>{count} 篇</span>
-                        </div>
+                        </Link>
                     ))}
                 </div>
 
@@ -67,12 +67,18 @@ export default async function Categories() {
                     <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" style={{ display: 'inline-block', marginRight: '8px', verticalAlign: '-3px' }}><path d="m15 5 4 4"></path><path d="M13 14l6.16-6.16a2 2 0 0 0 0-2.82l-.4-.4a2 2 0 0 0-2.82 0L9.78 10.78"></path><path d="m7.3 14 6.7 6.7a2 2 0 0 1-.2 3l-1.4 1.4a2 2 0 0 1-2.8 0L2 17.5 7.3 14z"></path></svg>
                     文章标签
                 </h2>
-                <div style={{ display: 'flex', flexWrap: 'wrap', gap: '0.8rem' }}>
+                <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(200px, 1fr))', gap: '1rem', marginBottom: '3rem' }}>
                     {Object.entries(tags).map(([tag, count]) => (
-                        <div key={tag} className="tag-card">
-                            <span># {tag}</span>
-                            <span style={{ opacity: 0.5, fontSize: '0.85rem' }}>{count}</span>
-                        </div>
+                        <Link href={`/tags/${encodeURIComponent(tag)}`} key={tag} className="category-card" style={{ textDecoration: 'none', color: 'inherit' }}>
+                            <span style={{ fontWeight: '500' }}># {tag}</span>
+                            <span style={{
+                                background: 'var(--bg-primary)',
+                                padding: '0.2rem 0.6rem',
+                                borderRadius: '99px',
+                                fontSize: '0.85rem',
+                                color: 'var(--text-secondary)'
+                            }}>{count} 篇</span>
+                        </Link>
                     ))}
                 </div>
             </div>
