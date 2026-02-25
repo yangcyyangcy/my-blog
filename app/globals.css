@@ -180,42 +180,74 @@ main {
   }
 }
 
-/* Floating Glass Header */
+/* Floating Header - Redesigned to be transparent and absolute at top */
 .header {
-  position: fixed;
+  position: absolute;
+  /* Scrolls away with the page naturally */
   top: 0;
   left: 0;
   width: 100%;
   height: var(--nav-height);
 
-  background-color: rgba(255, 255, 255, 0.1);
-  backdrop-filter: blur(12px) saturate(180%);
-  -webkit-backdrop-filter: blur(12px) saturate(180%);
-
-  border-bottom: 1px solid rgba(255, 255, 255, 0.2);
-  box-shadow: var(--glass-shadow);
+  /* Transparent background */
+  background-color: transparent;
+  border-bottom: none;
+  box-shadow: none;
 
   z-index: 100;
   display: flex;
   align-items: center;
-  /* Smooth sliding animation */
-  transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), background-color 0.4s ease;
+
+  /* Initial state for fade-in */
+  opacity: 0;
+  transition: opacity 0.5s ease-in-out;
 }
 
-/* Visibility states controlled by Navigation component */
-.header.visible {
-  transform: translateY(0);
+.header.fade-in {
+  opacity: 1;
 }
 
-.header.hidden {
-  transform: translateY(-100%);
+.header-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  padding: 0 1.5rem;
 }
 
-@media (prefers-color-scheme: dark) {
-  .header {
-    background-color: rgba(15, 23, 42, 0.4);
-    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
-  }
+.logo {
+  font-weight: 800;
+  font-size: 1.25rem;
+  /* Force white font */
+  color: #ffffff;
+  letter-spacing: -0.03em;
+  text-decoration: none;
+  /* Override any text-fill tricks used previously */
+  background: none;
+  -webkit-text-fill-color: #ffffff;
+}
+
+.nav-links {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.nav-link {
+  display: flex;
+  align-items: center;
+  gap: 0.3rem;
+  /* Force white font */
+  color: #ffffff;
+  font-weight: 600;
+  font-size: 0.95rem;
+  padding: 0.5rem 0.8rem;
+  border-radius: var(--radius-sm);
+  transition: var(--transition);
+}
+
+.nav-link:hover {
+  background-color: rgba(255, 255, 255, 0.15);
+  /* Slight white glow on hover */
 }
 
 .header-container {

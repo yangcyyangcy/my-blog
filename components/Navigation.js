@@ -6,51 +6,34 @@ import { usePathname } from 'next/navigation';
 
 export default function Navigation() {
     const pathname = usePathname();
-    const [isVisible, setIsVisible] = useState(false);
+    const [isAtTop, setIsAtTop] = useState(false);
 
     useEffect(() => {
-        let scrollTimeout;
-
-        // 1. 如果在文章详情页内（/blog/具体文章名），导航栏被彻底隐藏
-        const isArticlePage = pathname.startsWith('/blog/') && pathname.length > 6;
-        if (isArticlePage) {
-            setIsVisible(false);
-            return;
-        }
-
-        // 2. 首页及其他页面：初始静止状态为"隐藏"，只有滑动时出现，滑动停止2s后再次隐藏
-        const handleScroll = () => {
-            // 一旦监听到滚动，立马显示导航栏
-            setIsVisible(true);
-
-            // 如果之前有倒计时，先清空重置
-            if (scrollTimeout) {
-                clearTimeout(scrollTimeout);
+        // Initial check on mount
+        const calculateScroll = () => {
+            if (window.scrollY < 10) {
+                setIsAtTop(true);
+            } else {
+                setIsAtTop(false);
             }
-
-            // 重新开始 2 秒的倒计时，时间一到就隐藏它
-            scrollTimeout = setTimeout(() => {
-                setIsVisible(false);
-            }, 2000);
         };
 
-        // 初始装载时检查是否非文章页如果是也要默认隐藏（等待滚动）
-        setIsVisible(false);
+        // Trigger initial fade-in after a tick so transition applies
+        setTimeout(calculateScroll, 50);
 
-        // 监听滚动事件
+        const handleScroll = () => {
+            calculateScroll();
+        };
+
         window.addEventListener('scroll', handleScroll, { passive: true });
 
-        // 组件卸载时清理定时器和监听
         return () => {
             window.removeEventListener('scroll', handleScroll);
-            if (scrollTimeout) {
-                clearTimeout(scrollTimeout);
-            }
         };
     }, [pathname]);
 
     return (
-        <header className={`header ${isVisible ? 'visible' : 'hidden'}`}>
+        <header className={`header ${isAtTop ? 'fade-in' : ''}`}>
             <div className="header-container">
                 <Link href="/" className="logo">
                     yancey
