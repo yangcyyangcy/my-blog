@@ -8,7 +8,7 @@ export default async function Home() {
 
     return (
         <div className="home-wrapper">
-            <section className="full-hero" style={{ backgroundImage: "url('https://images.unsplash.com/photo-1507525428034-b723cf961d3e?q=80&w=2000&auto=format&fit=crop')" }}>
+            <section className="full-hero">
                 <div className="hero-content">
                     <h1 className="hero-title">yancey</h1>
                     <p className="hero-subtitle">专注保姆级教程，小白福利站</p>
