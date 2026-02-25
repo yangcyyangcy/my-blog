@@ -1,6 +1,29 @@
 {
-  "commit": "c88af10f97a261903a3727709f6975520a55aa60",
-  "generated": "2026-02-25T06:44:30.147Z",
+  "commit": "083a9b6733fa93a1cab822226557b736be55b51d",
+  "generated": "2026-02-25T07:06:44.696Z",
   "metadata": [
+    {
+      "__outstatic": {
+        "commit": "083a9b6733fa93a1cab822226557b736be55b51d",
+        "hash": "1741790213",
+        "path": "outstatic/content/posts/hello-world.md"
+      },
+      "author": {
+        "name": "yancey",
+        "picture": "https://avatars.githubusercontent.com/u/221816690?v=4"
+      },
+      "category": "Life",
+      "collection": "posts",
+      "coverImage": "",
+      "description": "这是使用 Next.js 构建的个人博客系统的第一篇文章。演示了 Markdown 解析、代码高亮和样式排版。",
+      "publishedAt": "2024-05-20T00:00:00.000Z",
+      "slug": "hello-world",
+      "status": "published",
+      "tags": [
+        "Milestone",
+        "Introduction"
+      ],
+      "title": "我的第一篇博客文章"
+    }
   ]
 }

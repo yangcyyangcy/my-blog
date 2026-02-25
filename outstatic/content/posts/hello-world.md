@@ -1,14 +1,17 @@
 ---
 title: "我的第一篇博客文章"
-status: 'published'
+status: "published"
 author:
-  name: "新晋博主"
-slug: 'hello-world'
+  name: "yancey"
+  picture: "https://avatars.githubusercontent.com/u/221816690?v=4"
+slug: "hello-world"
 description: "这是使用 Next.js 构建的个人博客系统的第一篇文章。演示了 Markdown 解析、代码高亮和样式排版。"
-coverImage: ''
+coverImage: ""
 publishedAt: "2024-05-20T00:00:00.000Z"
 category: "Life"
-tags: ["Milestone", "Introduction"]
+tags:
+  - "Milestone"
+  - "Introduction"
 ---
 
 欢迎来到我的个人博客！这篇文章是用来演示该博客系统如何将 **Markdown** 文件完美转换为漂亮的网页。
