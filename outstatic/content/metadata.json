@@ -1,10 +1,10 @@
 {
-  "commit": "b00d5ca6aa85afad6a3cc01f29e76ea59bee9ad3",
-  "generated": "2026-02-25T06:36:55.803Z",
+  "commit": "4209baa6399790ff6133a798295b4e074c4ae657",
+  "generated": "2026-02-25T06:37:17.477Z",
   "metadata": [
     {
       "__outstatic": {
-        "commit": "b00d5ca6aa85afad6a3cc01f29e76ea59bee9ad3",
+        "commit": "4209baa6399790ff6133a798295b4e074c4ae657",
         "hash": "771523844",
         "path": "outstatic/content/_singletons/ce-shi.mdx"
       },
