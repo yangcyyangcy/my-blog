@@ -50,7 +50,8 @@ export default function SearchModal({ isOpen, onClose }) {
         const filtered = posts.filter(post =>
             (post.title && post.title.toLowerCase().includes(lowerQuery)) ||
             (post.description && post.description.toLowerCase().includes(lowerQuery)) ||
-            (post.category && post.category.toLowerCase().includes(lowerQuery))
+            (post.category && post.category.toLowerCase().includes(lowerQuery)) ||
+            (post.content && post.content.toLowerCase().includes(lowerQuery))
         );
 
         setResults(filtered.slice(0, 8)); // Limit to top 8 results
