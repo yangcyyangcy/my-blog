@@ -65,6 +65,35 @@ export default function SearchModal({ isOpen, onClose }) {
         return () => window.removeEventListener('keydown', handleKeyDown);
     }, [onClose]);
 
+    // Helper to highlight matching text
+    const highlightMatch = (text, highlight) => {
+        if (!text || !highlight) return text;
+        const parts = text.split(new RegExp(`(${highlight})`, 'gi'));
+        return parts.map((part, i) =>
+            part.toLowerCase() === highlight.toLowerCase() ?
+                <span key={i} style={{ color: 'red', fontWeight: 'bold' }}>{part}</span> : part
+        );
+    };
+
+    // Helper to get an excerpt around the match
+    const getExcerpt = (content, highlight) => {
+        if (!content || !highlight) return '';
+        const lowerContent = content.toLowerCase();
+        const lowerHighlight = highlight.toLowerCase();
+        const index = lowerContent.indexOf(lowerHighlight);
+
+        if (index === -1) return '';
+
+        const start = Math.max(0, index - 30);
+        const end = Math.min(content.length, index + highlight.length + 30);
+
+        let excerpt = content.substring(start, end);
+        if (start > 0) excerpt = '...' + excerpt;
+        if (end < content.length) excerpt = excerpt + '...';
+
+        return highlightMatch(excerpt, highlight);
+    };
+
     if (!isOpen) return null;
 
     return (
@@ -82,7 +111,7 @@ export default function SearchModal({ isOpen, onClose }) {
                         <input
                             ref={inputRef}
                             type="text"
-                            placeholder="搜索文章..."
+                            placeholder="搜索文章标题、内容或分类..."
                             value={query}
                             onChange={(e) => setQuery(e.target.value)}
                             className="search-input"
@@ -92,7 +121,7 @@ export default function SearchModal({ isOpen, onClose }) {
                 </div>
 
                 <div className="search-results">
-                    {loading && <div className="search-loading">正在加载数据...</div>}
+                    {loading && <div className="search-loading">正在加载数据... (这可能需要几秒钟)</div>}
 
                     {!loading && query.trim() !== '' && results.length === 0 && (
                         <div className="search-empty">没有找到与 "{query}" 相关的文章</div>
@@ -100,17 +129,41 @@ export default function SearchModal({ isOpen, onClose }) {
 
                     {!loading && results.length > 0 && (
                         <ul className="search-list">
-                            {results.map((post) => (
-                                <li key={post.slug}>
-                                    <Link href={`/blog/${post.slug}`} className="search-result-item" onClick={onClose}>
-                                        <div className="search-result-title">{post.title}</div>
-                                        <div className="search-result-meta">
-                                            <span>{post.category || '未分类'}</span>
-                                            <span>{new Date(post.date).toLocaleDateString('zh-CN')}</span>
-                                        </div>
-                                    </Link>
-                                </li>
-                            ))}
+                            {results.map((post) => {
+                                // Check if match is in content but not in title/description
+                                const lowerQuery = query.toLowerCase();
+                                const inTitleOrDesc =
+                                    (post.title && post.title.toLowerCase().includes(lowerQuery)) ||
+                                    (post.description && post.description.toLowerCase().includes(lowerQuery));
+
+                                return (
+                                    <li key={post.slug}>
+                                        <Link href={`/blog/${post.slug}`} className="search-result-item" onClick={onClose}>
+                                            <div className="search-result-title">
+                                                {highlightMatch(post.title, query)}
+                                            </div>
+
+                                            {/* Show matched excerpt if found in content body */}
+                                            {!inTitleOrDesc && post.content && post.content.toLowerCase().includes(lowerQuery) && (
+                                                <div className="search-result-excerpt" style={{ fontSize: '0.9rem', color: 'var(--text-muted)', marginBottom: '0.5rem', lineHeight: '1.4' }}>
+                                                    {getExcerpt(post.content, query)}
+                                                </div>
+                                            )}
+
+                                            {(inTitleOrDesc && post.description) && (
+                                                <div className="search-result-excerpt" style={{ fontSize: '0.9rem', color: 'var(--text-muted)', marginBottom: '0.5rem', lineHeight: '1.4' }}>
+                                                    {highlightMatch(post.description, query)}
+                                                </div>
+                                            )}
+
+                                            <div className="search-result-meta">
+                                                <span>{highlightMatch(post.category || '未分类', query)}</span>
+                                                <span>{new Date(post.date).toLocaleDateString('zh-CN')}</span>
+                                            </div>
+                                        </Link>
+                                    </li>
+                                );
+                            })}
                         </ul>
                     )}
                 </div>
