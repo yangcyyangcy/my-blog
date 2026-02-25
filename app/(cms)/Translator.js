@@ -20,6 +20,8 @@ export default function Translator() {
             'Update': '更新发布',
             'Draft': '草稿',
             'Published': '已发布',
+            'draft': '草稿',
+            'published': '已发布',
             'Title': '文章标题',
             'Status': '发布状态',
             'Slug': '网址后缀 (Slug)',
@@ -41,8 +43,8 @@ export default function Translator() {
             'Collection Name': '分类名称 (如：posts)',
             'First time here?': '首次配置提示',
             "It seems you haven't set up your media paths yet. Let's do that!": '在使用图片前，您需要先指定一下 Github 中存放图片的具体位置：',
-            'Repository Media Path': 'Github 资源库图片路径 (默认即可)',
-            'Public Media Path': '访问路径前缀 (默认即可)',
+            'Repository Media Path': 'Github 资源库图片路径 (请照着灰字输入 public/images/)',
+            'Public Media Path': '访问路径前缀 (请照着灰字输入 /images/)',
             'Update Media Paths': '确认保存路径设置',
             'Sign Out': '退出登录',
             'Search files...': '搜索图片...',
@@ -64,7 +66,14 @@ export default function Translator() {
             'To learn more about how documents work': '如需了解文档的运作方式，',
             'click here': '查阅官方手册',
             'No media files available. Upload some files to get started!': '没有找到图片，点击右上角上传吧！',
-            'First time setting up?': '初次使用图片库？'
+            'First time setting up?': '初次使用图片库？',
+            'Outstatic': '博客管理后台',
+            'Recommended': '推荐',
+            'Used for repeating content with the same structure': '用于具备相同结构的重复性文章',
+            'Blog posts • Projects • Case studies • Team members': '例如：博客文章・项目记录・案例分析・团队成员等',
+            'January': '1月', 'February': '2月', 'March': '3月', 'April': '4月',
+            'May': '5月', 'June': '6月', 'July': '7月', 'August': '8月',
+            'September': '9月', 'October': '10月', 'November': '11月', 'December': '12月'
         }
 
         // Simplify UI by hiding paid or complicated features
