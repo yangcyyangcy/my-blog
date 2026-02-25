@@ -451,15 +451,27 @@ main {
   font-weight: 500;
   text-shadow: 0 2px 8px rgba(0, 0, 0, 0.5);
 
-  /* Typewriter effect */
-  display: inline-block;
+  /* Robust Typewriter Container */
+  display: inline-grid;
+  margin: 0 auto;
+  text-align: left;
+}
+
+.typewriter-sizer {
+  grid-area: 1 / 1;
+  visibility: hidden;
+  /* Takes up exact width of the font but is invisible */
+  white-space: nowrap;
+}
+
+.typewriter-text {
+  grid-area: 1 / 1;
   overflow: hidden;
   white-space: nowrap;
   border-right: 2.5px solid rgba(255, 255, 255, 0.9);
-  margin: 0 auto;
-  text-align: left;
-  width: 15em;
-  /* Exactly 15 Chinese characters */
+  width: 100%;
+  /* Animates from 0% to exactly 100% of the sizer's width */
+  margin: 0;
   animation:
     typing-loop 6s steps(15, end) infinite,
     cursor-blink 0.8s step-end infinite;
@@ -469,17 +481,17 @@ main {
 
   0%,
   15% {
-    width: 0;
+    width: 0%;
   }
 
   40%,
   60% {
-    width: 15em;
+    width: 100%;
   }
 
   85%,
   100% {
-    width: 0;
+    width: 0%;
   }
 }
 
