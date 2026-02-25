@@ -873,3 +873,76 @@ main {
     margin-left: 0;
   }
 }
+
+/* ==========================================================================
+   CATEGORIES & LABELS COMPONENT
+   ========================================================================== */
+.category-card {
+  background: var(--bg-secondary);
+  border: 1px solid var(--border);
+  border-radius: 0.8rem;
+  padding: 1.2rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  transition: all 0.2s ease;
+  cursor: default;
+}
+
+.category-card:hover {
+  border-color: var(--accent);
+  transform: translateY(-2px);
+}
+
+.tag-card {
+  background: var(--bg-primary);
+  border: 1px solid var(--border);
+  border-radius: 99px;
+  padding: 0.5rem 1rem;
+  font-size: 0.95rem;
+  color: var(--text-secondary);
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  transition: all 0.2s ease;
+  cursor: default;
+}
+
+.tag-card:hover {
+  color: var(--accent);
+  border-color: var(--accent);
+}
+
+/* ==========================================================================
+   JOURNAL COMPONENT
+   ========================================================================== */
+.journal-card {
+  background: var(--bg-primary);
+  border: 1px solid var(--border);
+  padding: 2rem;
+  border-radius: 1.2rem;
+  margin-bottom: 2.5rem;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.03);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.journal-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.06);
+}
+
+.action-btn {
+  background: none;
+  border: none;
+  color: inherit;
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  cursor: pointer;
+  outline: none;
+  transition: color 0.2s;
+}
+
+.action-btn:hover {
+  color: var(--accent);
+}

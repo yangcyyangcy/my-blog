@@ -49,18 +49,7 @@ export default async function Categories() {
                 </h2>
                 <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(200px, 1fr))', gap: '1rem', marginBottom: '3rem' }}>
                     {Object.entries(categories).map(([category, count]) => (
-                        <div key={category} style={{
-                            background: 'var(--bg-secondary)',
-                            border: '1px solid var(--border)',
-                            borderRadius: '0.8rem',
-                            padding: '1.2rem',
-                            display: 'flex',
-                            justifyContent: 'space-between',
-                            alignItems: 'center',
-                            transition: 'all 0.2s ease',
-                            cursor: 'default'
-                        }} onMouseEnter={(e) => { e.currentTarget.style.borderColor = 'var(--accent)'; e.currentTarget.style.transform = 'translateY(-2px)' }}
-                            onMouseLeave={(e) => { e.currentTarget.style.borderColor = 'var(--border)'; e.currentTarget.style.transform = 'translateY(0)' }}>
+                        <div key={category} className="category-card">
                             <span style={{ fontWeight: '500' }}>{category}</span>
                             <span style={{
                                 background: 'var(--bg-primary)',
@@ -80,20 +69,7 @@ export default async function Categories() {
                 </h2>
                 <div style={{ display: 'flex', flexWrap: 'wrap', gap: '0.8rem' }}>
                     {Object.entries(tags).map(([tag, count]) => (
-                        <div key={tag} style={{
-                            background: 'var(--bg-primary)',
-                            border: '1px solid var(--border)',
-                            borderRadius: '99px',
-                            padding: '0.5rem 1rem',
-                            fontSize: '0.95rem',
-                            color: 'var(--text-secondary)',
-                            display: 'flex',
-                            alignItems: 'center',
-                            gap: '0.5rem',
-                            transition: 'all 0.2s ease',
-                            cursor: 'default'
-                        }} onMouseEnter={(e) => { e.currentTarget.style.color = 'var(--accent)'; e.currentTarget.style.borderColor = 'var(--accent)' }}
-                            onMouseLeave={(e) => { e.currentTarget.style.color = 'var(--text-secondary)'; e.currentTarget.style.borderColor = 'var(--border)' }}>
+                        <div key={tag} className="tag-card">
                             <span># {tag}</span>
                             <span style={{ opacity: 0.5, fontSize: '0.85rem' }}>{count}</span>
                         </div>
