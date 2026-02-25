@@ -1,11 +1,26 @@
+import Link from 'next/link';
 import Sidebar from '@/components/Sidebar';
-import Comments from '@/components/Comments';
+import { getSortedPostsData } from '@/lib/posts';
 
 export const metadata = {
     title: '关于 | yancey',
 };
 
-export default function About() {
+export const revalidate = 60; // ISR Support
+
+export default async function About() {
+    const allPostsData = await getSortedPostsData();
+
+    // Group posts by Year for the timeline
+    const groupedPosts = allPostsData.reduce((acc, post) => {
+        const year = new Date(post.date).getFullYear();
+        if (!acc[year]) acc[year] = [];
+        acc[year].push(post);
+        return acc;
+    }, {});
+
+    const sortedYears = Object.keys(groupedPosts).sort((a, b) => b - a);
+
     return (
         <div className="container layout-wrapper" style={{ marginTop: 'calc(var(--nav-height) + 2rem)' }}>
             <div className="main-content">
@@ -17,20 +32,8 @@ export default function About() {
                 </div>
 
                 <div className="markdown-content" style={{ marginTop: '1rem', fontSize: '1.05rem', lineHeight: '1.8', color: 'var(--text-primary)' }}>
-                    <p>
-                        这是一个由 <strong>Next.js + Notion API</strong> 驱动的现代化极客博客。我在这里记录关于技术的探索、折腾各种工具的心得，以及生活中的碎碎念。
-                    </p>
-
-                    <h2 style={{ fontSize: '1.5rem', fontWeight: '700', marginTop: '2.5rem', marginBottom: '1rem' }}>关于本站</h2>
-                    <ul style={{ paddingLeft: '1.5rem', marginBottom: '2rem' }}>
-                        <li><strong>架构：</strong> 基于 Next.js App Router 的 React 服务端组件架构。</li>
-                        <li><strong>数据源：</strong> 告别本地 Markdown，完全通过 Notion 数据库进行全自动无头(Headless)管理。</li>
-                        <li><strong>部署：</strong> 托管于 Vercel 边缘网络，开启了 ISR（增量静态缓存），发文即时同步。</li>
-                        <li><strong>设计语言：</strong> 全局高对比度深色模式，搭配流畅的微量玻璃态动效。</li>
-                    </ul>
-
-                    <h2 style={{ fontSize: '1.5rem', fontWeight: '700', marginTop: '2.5rem', marginBottom: '1rem' }}>找到我</h2>
-                    <div style={{ display: 'flex', gap: '1rem' }}>
+                    <h2 style={{ fontSize: '1.5rem', fontWeight: '700', marginTop: '1.5rem', marginBottom: '1rem' }}>找到我</h2>
+                    <div style={{ display: 'flex', gap: '1rem', marginBottom: '3rem' }}>
                         <a href="https://github.com/yanceyyancey" target="_blank" rel="noopener noreferrer" style={{
                             display: 'inline-flex', alignItems: 'center', gap: '0.5rem',
                             padding: '0.5rem 1rem', background: 'var(--bg-secondary)', borderRadius: '0.5rem',
@@ -50,10 +53,37 @@ export default function About() {
                     </div>
                 </div>
 
-                <div style={{ marginTop: '4rem', paddingTop: '3rem', borderTop: '1px solid var(--border)' }}>
-                    <h3 style={{ marginBottom: '0.5rem', fontSize: '1.5rem', fontWeight: '700' }}>留言板</h3>
-                    <p style={{ color: 'var(--text-secondary)', marginBottom: '2rem' }}>在这里留下你想对我说的话，或者单纯打个招呼吧！</p>
-                    <Comments />
+                {/* Timeline Archives rendered directly in the About page */}
+                <div style={{ marginTop: '2rem', paddingTop: '3rem', borderTop: '1px solid var(--border)' }}>
+                    <h2 style={{ fontSize: '1.5rem', fontWeight: '700', marginBottom: '2rem' }}>所有归档 ({allPostsData.length})</h2>
+                    <div className="timeline-container">
+                        {sortedYears.map((year) => (
+                            <div key={year} className="timeline-year-group">
+                                <h2 className="timeline-year">{year}</h2>
+                                <div className="timeline-posts">
+                                    {groupedPosts[year].map(({ slug, title, date, category }) => {
+                                        const postDate = new Date(date);
+                                        const monthDay = `${(postDate.getMonth() + 1).toString().padStart(2, '0')}-${postDate.getDate().toString().padStart(2, '0')}`;
+
+                                        return (
+                                            <div key={slug} className="timeline-item">
+                                                <div className="timeline-dot"></div>
+                                                <div className="timeline-content">
+                                                    <span className="timeline-date">{monthDay}</span>
+                                                    <Link href={`/blog/${slug}`} className="timeline-title">
+                                                        {title}
+                                                    </Link>
+                                                    {category && (
+                                                        <span className="timeline-category">{category}</span>
+                                                    )}
+                                                </div>
+                                            </div>
+                                        );
+                                    })}
+                                </div>
+                            </div>
+                        ))}
+                    </div>
                 </div>
             </div>
 
