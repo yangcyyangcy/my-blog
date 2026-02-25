@@ -358,7 +358,7 @@ main {
   color: white;
 }
 
-/* Pseudo-element for the background image so we can scale it independently of the text */
+/* Pseudo-element for the background image */
 .full-hero::after {
   content: '';
   position: absolute;
@@ -366,13 +366,10 @@ main {
   left: 0;
   right: 0;
   bottom: 0;
-  background-image: url('/images/hero-ruins-original.jpg');
+  background-image: url('/images/hero-ruins-16-9.jpg');
   background-size: cover;
-  background-position: center bottom;
+  background-position: center center;
   background-repeat: no-repeat;
-  /* Scale up by 5% to push the bottom-right watermark out of bounds */
-  transform: scale(1.05);
-  transform-origin: bottom right;
   z-index: 0;
 }
 
