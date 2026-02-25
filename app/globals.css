@@ -198,7 +198,17 @@ main {
   z-index: 100;
   display: flex;
   align-items: center;
-  transition: var(--transition);
+  /* Smooth sliding animation */
+  transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), background-color 0.4s ease;
+}
+
+/* Visibility states controlled by Navigation component */
+.header.visible {
+  transform: translateY(0);
+}
+
+.header.hidden {
+  transform: translateY(-100%);
 }
 
 @media (prefers-color-scheme: dark) {
