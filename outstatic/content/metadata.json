@@ -1,6 +1,6 @@
 {
-  "commit": "9c6cccbf923e594232888b122437435061b8c640",
-  "generated": "2026-02-25T07:09:35.018Z",
+  "commit": "4ec1ac7df885eb4379fbb3fc8eca1b90bec9cbc1",
+  "generated": "2026-02-25T07:21:55.775Z",
   "metadata": [
     {
       "__outstatic": {
@@ -24,22 +24,6 @@
         "Introduction"
       ],
       "title": "我的第一篇博客文章"
-    },
-    {
-      "__outstatic": {
-        "commit": "9c6cccbf923e594232888b122437435061b8c640",
-        "hash": "949859361",
-        "path": "outstatic/content/posts/ce-shi.md"
-      },
-      "author": {
-        "name": "yancey",
-        "picture": "https://avatars.githubusercontent.com/u/221816690?v=4"
-      },
-      "collection": "posts",
-      "publishedAt": "2026-02-25T07:56:33.763Z",
-      "slug": "ce-shi",
-      "status": "published",
-      "title": "测试"
     }
   ]
 }
