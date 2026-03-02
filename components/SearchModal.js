@@ -51,7 +51,7 @@ export default function SearchModal({ isOpen, onClose }) {
             (post.title && post.title.toLowerCase().includes(lowerQuery)) ||
             (post.description && post.description.toLowerCase().includes(lowerQuery)) ||
             (post.category && post.category.toLowerCase().includes(lowerQuery)) ||
-            (post.content && post.content.toLowerCase().includes(lowerQuery))
+            (post.tags && post.tags.some(tag => tag.toLowerCase().includes(lowerQuery)))
         );
 
         setResults(filtered.slice(0, 8)); // Limit to top 8 results
@@ -144,10 +144,10 @@ export default function SearchModal({ isOpen, onClose }) {
                                                 {highlightMatch(post.title, query)}
                                             </div>
 
-                                            {/* Show matched excerpt if found in content body */}
-                                            {!inTitleOrDesc && post.content && post.content.toLowerCase().includes(lowerQuery) && (
+                                            {/* Show matched excerpt if found in description */}
+                                            {(inTitleOrDesc && post.description) && (
                                                 <div className="search-result-excerpt" style={{ fontSize: '0.9rem', color: 'var(--text-muted)', marginBottom: '0.5rem', lineHeight: '1.4' }}>
-                                                    {getExcerpt(post.content, query)}
+                                                    {highlightMatch(post.description, query)}
                                                 </div>
                                             )}
 

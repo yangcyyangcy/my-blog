@@ -33,6 +33,12 @@ export default async function Post({ params }) {
                 </Link>
 
                 <header className="article-header">
+                    <div className="post-tags" style={{ marginBottom: '1rem', display: 'flex', gap: '0.5rem', flexWrap: 'wrap', justifyContent: 'center' }}>
+                        {postData.category && <span style={{ fontSize: '0.85rem', padding: '0.3rem 0.8rem', background: 'var(--accent-light)', color: 'var(--accent)', borderRadius: '16px', fontWeight: '600' }}>{postData.category}</span>}
+                        {postData.tags && postData.tags.map(tag => (
+                            <span key={tag} style={{ fontSize: '0.85rem', padding: '0.3rem 0.8rem', background: 'var(--bg-subtle)', color: 'var(--text-secondary)', borderRadius: '16px' }}>#{tag}</span>
+                        ))}
+                    </div>
                     <h1 className="article-title">{postData.title}</h1>
                     <div className="article-meta">
                         <span>
