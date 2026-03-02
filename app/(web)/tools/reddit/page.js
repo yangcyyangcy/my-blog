@@ -18,7 +18,6 @@ export default function RedditScraperPage() {
         setResult(null);
 
         try {
-            // 请求我们刚刚写的 Next.js 后端 API
             const res = await fetch(`/api/scrape-reddit?url=${encodeURIComponent(url)}`);
             const data = await res.json();
 
@@ -34,29 +33,21 @@ export default function RedditScraperPage() {
         }
     };
 
-    // 生成 CSV 并触发浏览器下载的纯前端逻辑
     const downloadCSV = () => {
         if (!result || !result.comments || result.comments.length === 0) return;
 
-        // 1. 设置表头
         const headers = ['Author,Score,Body'];
-
-        // 2. 拼接数据行 (处理内容里面可能存在的逗号或引号，遵循 RFC 4180 标准)
         const rows = result.comments.map(c => {
-            // 字段里如果有双引号，需要变成两个双引号，并在外层包裹双引号
             const safeBody = `"${c.body.replace(/"/g, '""')}"`;
             return `${c.author},${c.score},${safeBody}`;
         });
 
         const csvContent = headers.concat(rows).join('\n');
-
-        // 3. 构建 Blob 并触发下载 (加入 BOM 前缀 \uFEFF 解决 Excel 中文乱码问题)
         const blob = new Blob(['\uFEFF' + csvContent], { type: 'text/csv;charset=utf-8;' });
         const link = document.createElement('a');
         const urlBlob = URL.createObjectURL(blob);
         link.setAttribute('href', urlBlob);
 
-        // 自动生成形如 reddit_comments_1710000000000.csv 的文件名
         const timestamp = new Date().getTime();
         link.setAttribute('download', `reddit_comments_${timestamp}.csv`);
 
@@ -66,23 +57,31 @@ export default function RedditScraperPage() {
     };
 
     return (
-        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-10 pt-24 font-sans text-gray-800">
+        <div className="min-h-screen bg-gradient-to-br from-indigo-50 via-white to-purple-50 font-sans text-gray-800">
             <Navigation />
 
-            <div className="max-w-3xl mx-auto">
-                <h1 className="text-4xl font-extrabold mb-4 tracking-tight">Reddit Comment Scraper</h1>
-                <p className="text-lg text-gray-500 mb-10 leading-relaxed">
-                    Paste a Reddit post URL below to automatically extract, clean, and filter high-quality comments into a downloadable spreadsheet.
+            {/* 居中且充满视觉冲击力的 Hero 区域 */}
+            <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-20 pt-32 text-center">
+                <h1 className="text-5xl md:text-7xl font-extrabold mb-6 tracking-tight text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-purple-600 drop-shadow-sm">
+                    Reddit Comment Miner
+                </h1>
+                <p className="text-xl md:text-2xl text-gray-500 mb-12 leading-relaxed max-w-2xl mx-auto font-light">
+                    Extract, filter, and export high-quality Reddit discussions directly into an organized CSV spreadsheet in seconds.
                 </p>
 
-                {/* 搜索框 */}
-                <form onSubmit={handleScrape} className="mb-8">
-                    <div className="flex flex-col sm:flex-row gap-3">
+                {/* 增大尺寸并且极具现代感的输入框 */}
+                <form onSubmit={handleScrape} className="mb-12 relative z-10 max-w-3xl mx-auto">
+                    <div className="relative flex items-center group">
+                        <div className="absolute inset-y-0 left-0 pl-6 flex items-center pointer-events-none">
+                            <svg className="w-8 h-8 text-gray-400 group-focus-within:text-blue-500 transition-colors" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M13.828 10.172a4 4 0 00-5.656 0l-4 4a4 4 0 105.656 5.656l1.102-1.101m-.758-4.899a4 4 0 005.656 0l4-4a4 4 0 00-5.656-5.656l-1.1 1.1" />
+                            </svg>
+                        </div>
                         <input
                             type="url"
-                            placeholder="https://www.reddit.com/r/..."
+                            placeholder="Paste your Reddit post link here..."
                             required
-                            className="flex-1 px-4 py-3 rounded-xl border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all shadow-sm"
+                            className="w-full pl-16 pr-40 py-6 text-xl rounded-2xl border-2 border-white focus:outline-none focus:border-blue-400 focus:ring-4 focus:ring-blue-100 placeholder-gray-300 shadow-[0_8px_30px_rgb(0,0,0,0.08)] transition-all bg-white/80 backdrop-blur-md"
                             value={url}
                             onChange={(e) => setUrl(e.target.value)}
                             disabled={loading}
@@ -90,85 +89,105 @@ export default function RedditScraperPage() {
                         <button
                             type="submit"
                             disabled={loading || !url}
-                            className={`px-8 py-3 rounded-xl font-medium text-white shadow-md transition-all ${loading
-                                    ? 'bg-blue-400 cursor-not-allowed'
-                                    : 'bg-blue-600 hover:bg-blue-700 hover:shadow-lg active:transform active:scale-95'
+                            className={`absolute right-3 top-3 bottom-3 px-8 rounded-xl font-bold text-lg text-white shadow-lg transition-all ${loading
+                                    ? 'bg-blue-400/80 cursor-not-allowed scale-95'
+                                    : 'bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-700 hover:to-indigo-700 hover:shadow-xl active:scale-95'
                                 }`}
                         >
                             {loading ? (
                                 <span className="flex items-center gap-2">
-                                    <svg className="animate-spin h-5 w-5 text-white" viewBox="0 0 24 24">
+                                    <svg className="animate-spin h-6 w-6 text-white" viewBox="0 0 24 24">
                                         <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" fill="none"></circle>
                                         <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
                                     </svg>
-                                    Scraping...
+                                    Mining...
                                 </span>
-                            ) : 'Scrape'}
+                            ) : 'Extract Now'}
                         </button>
                     </div>
                 </form>
 
-                {/* 错误提示 */}
+                {/* 悬浮风格的错误提示 */}
                 {error && (
-                    <div className="p-4 mb-6 rounded-xl bg-red-50 border border-red-200 text-red-700">
-                        <p className="font-semibold flex items-center gap-2">
-                            <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 20 20"><path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM8.707 7.293a1 1 0 00-1.414 1.414L8.586 10l-1.293 1.293a1 1 0 101.414 1.414L10 11.414l1.293 1.293a1 1 0 001.414-1.414L11.414 10l1.293-1.293a1 1 0 00-1.414-1.414L10 8.586 8.707 7.293z" clipRule="evenodd"></path></svg>
-                            Error
+                    <div className="max-w-2xl mx-auto p-5 mb-8 rounded-2xl bg-red-50/90 backdrop-blur-sm border-2 border-red-100 text-red-700 shadow-md animate-in fade-in zoom-in-95 data-[state=closed]:animate-out data-[state=closed]:fade-out data-[state=closed]:zoom-out-95">
+                        <p className="font-bold flex items-center justify-center gap-2 text-lg">
+                            <span className="p-1.5 bg-red-100 rounded-full">
+                                <svg className="w-5 h-5 text-red-600" fill="currentColor" viewBox="0 0 20 20"><path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM8.707 7.293a1 1 0 00-1.414 1.414L8.586 10l-1.293 1.293a1 1 0 101.414 1.414L10 11.414l1.293 1.293a1 1 0 001.414-1.414L11.414 10l1.293-1.293a1 1 0 00-1.414-1.414L10 8.586 8.707 7.293z" clipRule="evenodd"></path></svg>
+                            </span>
+                            Whoops! {error}
                         </p>
-                        <p className="mt-1 text-sm">{error}</p>
                     </div>
                 )}
 
-                {/* 抓取结果区域 */}
+                {/* 玻璃拟物态的抓取结果容器 */}
                 {result && (
-                    <div className="bg-white rounded-2xl border border-gray-200 shadow-sm overflow-hidden animate-in fade-in slide-in-from-bottom-4 duration-500">
-                        <div className="p-6 border-b border-gray-100 flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 bg-gray-50/50">
-                            <div>
-                                <h3 className="text-xl font-bold text-gray-900 line-clamp-1" title={result.title}>
+                    <div className="bg-white/70 backdrop-blur-xl rounded-3xl border border-white shadow-[0_8px_30px_rgb(0,0,0,0.04)] overflow-hidden animate-in slide-in-from-bottom-8 duration-700 max-w-5xl mx-auto text-left relative z-10">
+                        <div className="p-8 border-b border-gray-100/50 flex flex-col md:flex-row justify-between items-start md:items-center gap-6 bg-gradient-to-r from-gray-50/50 to-white/30">
+                            <div className="flex-1">
+                                <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-blue-50 text-blue-600 text-xs font-bold tracking-wide uppercase mb-3">
+                                    <span className="w-2 h-2 rounded-full bg-blue-500 animate-pulse"></span>
+                                    Extraction Complete
+                                </div>
+                                <h3 className="text-2xl font-bold text-gray-900 line-clamp-2 leading-tight" title={result.title}>
                                     {result.title}
                                 </h3>
-                                <p className="text-sm text-gray-500 mt-1">
-                                    Extracted <span className="font-medium text-gray-900">{result.count}</span> highly relevant comments
+                                <p className="text-gray-500 mt-2 font-medium">
+                                    Found <strong className="text-gray-900 bg-yellow-100 px-1 py-0.5 rounded">{result.count}</strong> high-quality comments matching filters.
                                 </p>
                             </div>
 
                             <button
                                 onClick={downloadCSV}
-                                className="flex-shrink-0 flex items-center gap-2 px-5 py-2.5 bg-green-600 hover:bg-green-700 text-white text-sm font-medium rounded-lg shadow-sm transition-colors"
+                                className="flex-shrink-0 flex items-center justify-center gap-3 w-full md:w-auto px-6 py-4 bg-gray-900 hover:bg-black text-white text-base font-bold rounded-xl shadow-lg hover:shadow-xl transition-all active:scale-95"
                             >
-                                <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path></svg>
+                                <svg className="w-5 h-5" fill="none" stroke="currentColor" strokeWidth="2.5" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path></svg>
                                 Download CSV
                             </button>
                         </div>
 
-                        {/* 评论预览列表 */}
-                        <div className="divide-y divide-gray-100 max-h-[500px] overflow-y-auto">
+                        {/* 评论预览卡片列表 - 美化的暗色阴影与边框 */}
+                        <div className="p-6 bg-gray-50/50 max-h-[600px] overflow-y-auto space-y-4">
                             {result.comments.length > 0 ? (
                                 result.comments.map((comment, index) => (
-                                    <div key={index} className="p-6 hover:bg-gray-50 transition-colors">
-                                        <div className="flex items-center gap-3 mb-2">
-                                            <span className="inline-flex items-center justify-center w-8 h-8 rounded-full bg-blue-100 text-blue-700 font-bold text-xs">
-                                                u/
-                                            </span>
-                                            <span className="font-semibold text-sm text-gray-900">{comment.author}</span>
-                                            <span className="flex items-center gap-1 text-xs font-medium px-2 py-0.5 rounded-full bg-orange-100 text-orange-700">
-                                                <svg className="w-3 h-3" fill="currentColor" viewBox="0 0 20 20"><path fillRule="evenodd" d="M3.293 9.707a1 1 0 010-1.414l6-6a1 1 0 011.414 0l6 6a1 1 0 01-1.414 1.414L11 5.414V17a1 1 0 11-2 0V5.414L4.707 9.707a1 1 0 01-1.414 0z" clipRule="evenodd"></path></svg>
+                                    <div key={index} className="p-6 bg-white rounded-2xl shadow-sm border border-gray-100 hover:shadow-md transition-shadow">
+                                        <div className="flex items-center justify-between mb-4">
+                                            <div className="flex items-center gap-3">
+                                                <div className="w-10 h-10 rounded-full bg-gradient-to-br from-blue-100 to-purple-100 flex items-center justify-center text-blue-700 font-bold shadow-inner">
+                                                    {comment.author.charAt(0).toUpperCase() || 'U'}
+                                                </div>
+                                                <div>
+                                                    <span className="block font-bold text-sm text-gray-900">u/{comment.author}</span>
+                                                    <span className="block text-xs text-gray-400 mt-0.5">Reddit User</span>
+                                                </div>
+                                            </div>
+                                            <div className="flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-orange-50 border border-orange-100 text-orange-700 font-bold text-sm shadow-sm">
+                                                <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 20 20"><path fillRule="evenodd" d="M3.293 9.707a1 1 0 010-1.414l6-6a1 1 0 011.414 0l6 6a1 1 0 01-1.414 1.414L11 5.414V17a1 1 0 11-2 0V5.414L4.707 9.707a1 1 0 01-1.414 0z" clipRule="evenodd"></path></svg>
                                                 {comment.score}
-                                            </span>
+                                            </div>
                                         </div>
-                                        <p className="text-gray-700 text-sm leading-relaxed whitespace-pre-wrap">
+                                        <p className="text-gray-700 text-[15px] leading-relaxed whitespace-pre-wrap pl-13">
                                             {comment.body}
                                         </p>
                                     </div>
                                 ))
                             ) : (
-                                <div className="p-10 text-center text-gray-500">
-                                    No relevant comments found remaining after filtering.
+                                <div className="p-16 text-center">
+                                    <div className="inline-flex w-20 h-20 rounded-full bg-gray-100 items-center justify-center mb-4">
+                                        <svg className="w-10 h-10 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.5" d="M20 13V6a2 2 0 00-2-2H6a2 2 0 00-2 2v7m16 0v5a2 2 0 01-2 2H6a2 2 0 01-2-2v-5m16 0h-2.586a1 1 0 00-.707.293l-2.414 2.414a1 1 0 01-.707.293h-3.172a1 1 0 01-.707-.293l-2.414-2.414A1 1 0 006.586 13H4" /></svg>
+                                    </div>
+                                    <h4 className="text-lg font-bold text-gray-900 mb-1">No relevant comments</h4>
+                                    <p className="text-gray-500 max-w-sm mx-auto">All fetched comments were either heavily downvoted, deleted, or too short to be considered extremely useful.</p>
                                 </div>
                             )}
                         </div>
                     </div>
                 )}
+            </div>
+
+            {/* 装饰性背景 */}
+            <div className="fixed top-0 left-0 w-full h-full overflow-hidden -z-10 pointer-events-none">
+                <div className="absolute top-[-10%] left-[-10%] w-[40%] h-[40%] rounded-full bg-blue-400/10 blur-[100px]"></div>
+                <div className="absolute bottom-[-10%] right-[-10%] w-[50%] h-[50%] rounded-full bg-purple-400/10 blur-[120px]"></div>
             </div>
         </div>
     );
