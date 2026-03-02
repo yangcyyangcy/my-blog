@@ -1,91 +1,118 @@
+import * as cheerio from 'cheerio';
 import { NextResponse } from 'next/server';
 
-function cleanText(text) {
-    if (!text) return "";
-    let cleaned = text.replace(/[\n\r]+/g, ' ');
-    cleaned = cleaned.replace(/\s+/g, ' ').trim();
-    return cleaned;
-}
-
-function isRelevantComment(author, body, score) {
-    if (!author || ["[deleted]", "[removed]", "AutoModerator"].includes(author)) return false;
-    if (!body || ["[deleted]", "[removed]"].includes(body)) return false;
-    if (score < 1) return false;
-    if (body.split(/\s+/).length < 3) return false;
-    return true;
-}
+export const dynamic = 'force-dynamic';
 
 export async function GET(request) {
+    const { searchParams } = new URL(request.url);
+    const url = searchParams.get('url');
+
+    if (!url) {
+        return NextResponse.json({ error: '请提供有效的 Reddit 链接' }, { status: 400 });
+    }
+
     try {
-        const { searchParams } = new URL(request.url);
-        const urlParam = searchParams.get('url');
-
-        if (!urlParam || !urlParam.includes('reddit.com')) {
-            return NextResponse.json(
-                { error: '无效的 Reddit 链接。请输入完整的 Reddit 帖子地址。' },
-                { status: 400 }
-            );
+        const match = url.match(/comments\/([a-zA-Z0-9]+)/);
+        if (!match) {
+            return NextResponse.json({ error: "无效的链接格式。请确保那是包含 'comments/...' 的有效 Reddit 帖子链接。" }, { status: 400 });
         }
 
-        let jsonUrl = urlParam;
-        if (!jsonUrl.endsWith('.json')) {
-            jsonUrl = jsonUrl.replace(/\/$/, '') + '/.json';
+        const postId = match[1];
+
+        // Use a reliable Redlib frontend array for fallback redundancy
+        const instances = [
+            'https://l.opnxng.com',
+            'https://redlib.ducks.party',
+            'https://redlib.perennialte.ch',
+            'https://redlib.4o1x5.dev'
+        ];
+
+        let html = null;
+        let successInstance = null;
+
+        for (const instance of instances) {
+            try {
+                // Notice we omit the subreddit. Redlib handles the redirect/localization internally.
+                const targetUrl = `${instance}/comments/${postId}`;
+
+                // Do NOT spoof Chrome UA here! Node fetch is less likely to be fingerprinted as a "fake browser" if it just uses default Node JS behavior 
+                // compared to providing a Chrome UA with a Node TLS fingerprint!
+                const response = await fetch(targetUrl, {
+                    next: { revalidate: 0 }
+                });
+
+                if (response.ok) {
+                    html = await response.text();
+                    // Basic sanity check: did cloudflare/fastly intercept with a Bot Challenge?
+                    if (!html.includes('Making sure you\'re not a bot!')) {
+                        successInstance = instance;
+                        break;
+                    }
+                }
+            } catch (e) {
+                console.warn(`Failed to fetch from ${instance}:`, e.message);
+                continue;
+            }
         }
 
-        // 使用极其简单的头信息或明确的爬虫身份以降低 Reddit 针对性拦截
-        // 大量实测表明：伪装成过于真实的浏览器偶尔由于缺乏 Cookies 反而被封
-        // 伪装成 GoogleBot 或者干脆使用老实本分的基础头信息存活率更高
-        const randomID = Math.floor(Math.random() * 1000000);
-        const response = await fetch(jsonUrl, {
-            headers: {
-                'User-Agent': `Mozilla/5.0 (compatible; Googlebot/2.1; +http://www.google.com/bot.html) req-${randomID}`,
-                'Accept': 'application/json',
-                'Cache-Control': 'no-cache'
-            },
-            next: { revalidate: 0 } // NextJS: 禁用该接口全量缓存
-        });
-
-        if (!response.ok) {
-            return NextResponse.json(
-                { error: `Reddit 防火墙拦截 (Code: ${response.status})。可能是当前 IP 被限流，请过几分钟再试，或尝试其他帖子链接。` },
-                { status: response.status }
-            );
+        if (!html || !successInstance) {
+            return NextResponse.json({ error: "所有代理节点均被限制或帖子已被删除。请稍后再试，或检查帖子是否仍在 Reddit 存活。" }, { status: 502 });
         }
 
-        const data = await response.json();
+        const $ = cheerio.load(html);
+        const postTitle = $('title').text().replace(' - Redlib', '').replace(' - r/', ' - ').trim();
 
-        // 解析内容
-        const postTitle = data[0]?.data?.children?.[0]?.data?.title || 'Unknown Title';
-        const commentsData = data[1]?.data?.children || [];
         const extracted = [];
 
-        for (const item of commentsData) {
-            if (item.kind === 'more') continue;
+        $('.comment').each((i, el) => {
+            // Find author
+            let authorUrl = $(el).find('.comment_author').first().text().trim();
+            let author = authorUrl.replace(/^u\//, ''); // Redlib usually prepends "u/"
 
-            const commentBody = item.data?.body || '';
-            const author = item.data?.author || '';
-            const score = item.data?.ups || 0;
+            // Find score (sometimes stored in span[title="Score"] or .score or .comment_score)
+            let scoreStr = $(el).find('.comment_score').first().text().trim();
 
-            if (isRelevantComment(author, commentBody, score)) {
-                extracted.push({
-                    author,
-                    score,
-                    body: cleanText(commentBody)
-                });
+            // Handle "1.2k" score parsing
+            let score = 0;
+            if (scoreStr) {
+                if (scoreStr.toLowerCase().includes('k')) {
+                    score = parseFloat(scoreStr) * 1000;
+                } else {
+                    scoreStr = scoreStr.replace(/,/g, '').replace(/[^0-9.-]/g, '');
+                    score = parseInt(scoreStr, 10) || 0;
+                }
             }
+
+            // Find body text inside comment_body
+            let body = $(el).find('.comment_body').first().text().trim();
+
+            if (author && !["[deleted]", "[removed]", "AutoModerator"].includes(author) &&
+                body && !["[deleted]", "[removed]"].includes(body) &&
+                score >= 1) {
+
+                // Extra basic filtering
+                if (body.split(/\s+/).length >= 3) {
+                    let cleanedBody = body.replace(/[\n\r]+/g, ' ').replace(/\s+/g, ' ').trim();
+                    extracted.push({ author, score, body: cleanedBody });
+                }
+            }
+        });
+
+        if (extracted.length === 0) {
+            return NextResponse.json({
+                error: "成功抓取，但该帖子下没有任何符合质量条件的有效评论（可能都是机器人或被踩折叠的短回复）。"
+            }, { status: 404 });
         }
 
         return NextResponse.json({
             title: postTitle,
             count: extracted.length,
-            comments: extracted
+            comments: extracted,
+            source: successInstance
         });
 
-    } catch (error) {
-        console.error('Anonymous Scrape Error:', error);
-        return NextResponse.json(
-            { error: '抓取时发生网络通信错误。' },
-            { status: 500 }
-        );
+    } catch (err) {
+        console.error('Scrape API Error:', err);
+        return NextResponse.json({ error: err.message }, { status: 500 });
     }
 }
