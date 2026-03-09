@@ -11,8 +11,20 @@ export default function ArticleContent({ contentHtml }) {
         // ── 1. MERMAID DIAGRAMS ─────────────────────────────────────────────────
         // Detect <pre><code class="language-mermaid"> blocks and render them visually
         const renderMermaid = async () => {
-            const mermaidBlocks = ref.current.querySelectorAll('pre code.language-mermaid, code.language-mermaid');
-            if (mermaidBlocks.length === 0) return;
+            // Match all possible class name formats remark/remark-gfm might output
+            const mermaidBlocks = ref.current.querySelectorAll(
+                'pre code.language-mermaid, code.language-mermaid, pre code.mermaid, code.mermaid'
+            );
+
+            // Also detect by content for cases where class isn't set (plain <pre><code> blocks)
+            const allCodeBlocks = ref.current.querySelectorAll('pre code:not([class])');
+            const mermaidKeywords = ['flowchart', 'graph ', 'sequenceDiagram', 'classDiagram', 'stateDiagram', 'gantt', 'pie ', 'erDiagram', 'journey'];
+            const detectedBlocks = Array.from(allCodeBlocks).filter(el =>
+                mermaidKeywords.some(kw => el.textContent.trimStart().startsWith(kw))
+            );
+
+            const allMermaid = [...new Set([...mermaidBlocks, ...detectedBlocks])];
+            if (allMermaid.length === 0) return;
 
             const mermaid = (await import('mermaid')).default;
             mermaid.initialize({
@@ -22,7 +34,7 @@ export default function ArticleContent({ contentHtml }) {
                 fontSize: 14,
             });
 
-            mermaidBlocks.forEach(async (codeEl, index) => {
+            allMermaid.forEach(async (codeEl, index) => {
                 const pre = codeEl.closest('pre') || codeEl;
                 const graphDefinition = codeEl.textContent;
                 const id = `mermaid-${Date.now()}-${index}`;
@@ -44,7 +56,7 @@ export default function ArticleContent({ contentHtml }) {
                     wrapper.innerHTML = svg;
                     pre.replaceWith(wrapper);
                 } catch (err) {
-                    console.warn('Mermaid render error:', err);
+                    console.warn('Mermaid render error for block #' + index + ':', err.message);
                 }
             });
         };
