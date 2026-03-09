@@ -1,7 +1,13 @@
-import { getPostData } from '@/lib/posts';
+import { getPostData, getAllPostIds } from '@/lib/posts';
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
 import Comments from '@/components/Comments';
+
+// Pre-generate all blog post pages at build time so Notion is NOT called on every user request
+export async function generateStaticParams() {
+    const allPostIds = await getAllPostIds();
+    return allPostIds.map(({ params }) => ({ slug: params.slug }));
+}
 
 export async function generateMetadata({ params }) {
     const { slug } = await params;
@@ -18,7 +24,9 @@ export async function generateMetadata({ params }) {
     }
 }
 
-export const revalidate = 60;
+export const revalidate = 300; // Serve cached static page for up to 5 minutes
+export const dynamicParams = true; // Allow slugs not in generateStaticParams (new posts) to be rendered on demand
+
 
 export default async function Post({ params }) {
     const { slug } = await params;
