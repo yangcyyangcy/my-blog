@@ -1,6 +1,8 @@
 'use client';
 
 import { useEffect, useRef } from 'react';
+import parse from 'html-react-parser';
+import NotionImage from './NotionImage';
 
 export default function ArticleContent({ contentHtml }) {
     const ref = useRef(null);
@@ -103,33 +105,23 @@ export default function ArticleContent({ contentHtml }) {
             });
         });
 
-        // ── 3. IMAGE STYLES ─────────────────────────────────────────────────────
-        const imgs = ref.current.querySelectorAll('img');
-        imgs.forEach(img => {
-            Object.assign(img.style, {
-                display: 'block',
-                maxWidth: '100%',
-                height: 'auto',
-                borderRadius: '12px',
-                margin: '1.5rem auto',
-                boxShadow: 'var(--shadow-md)',
-            });
-            img.setAttribute('loading', 'lazy');
-        });
-
-        ref.current.querySelectorAll('p').forEach(p => {
-            if (p.children.length === 1 && p.children[0].tagName === 'IMG') {
-                p.style.margin = '0';
-            }
-        });
-
     }, [contentHtml]);
 
     return (
-        <div
-            ref={ref}
-            className="markdown-content"
-            dangerouslySetInnerHTML={{ __html: contentHtml }}
-        />
+        <div ref={ref} className="markdown-content">
+            {parse(contentHtml, {
+                replace: (domNode) => {
+                    // Replace <img> tags with <NotionImage>
+                    if (domNode.name === 'img') {
+                        return (
+                            <NotionImage
+                                src={domNode.attribs.src}
+                                alt={domNode.attribs.alt}
+                            />
+                        );
+                    }
+                }
+            })}
+        </div>
     );
 }

@@ -30,9 +30,19 @@ export async function GET(request) {
                 ? block.image.external.url
                 : block.image.file.url;
 
-        // Redirect the browser to the fresh signed URL
-        // Use 302 (not 301) so every request always re-validates
-        return Response.redirect(imageUrl, 302);
+        // Instead of redirecting (which next/image optimizer dislikes),
+        // we fetch the actual image bytes and return them.
+        const imageResponse = await fetch(imageUrl);
+        const arrayBuffer = await imageResponse.arrayBuffer();
+
+        return new Response(arrayBuffer, {
+            headers: {
+                'Content-Type': imageResponse.headers.get('content-type') || 'image/jpeg',
+                // Cache intensely at the edge for 1 year, as we rely on next/image 
+                // caching mechanism anyway.
+                'Cache-Control': 'public, max-age=31536000, immutable',
+            },
+        });
     } catch (err) {
         console.error('notion-image proxy error:', err.message);
         return new Response('Image not found', { status: 404 });
