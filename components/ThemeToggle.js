@@ -5,7 +5,7 @@ import { useEffect, useState } from 'react';
 
 export default function ThemeToggle() {
     const [mounted, setMounted] = useState(false);
-    const { theme, setTheme } = useTheme();
+    const { theme, setTheme, resolvedTheme } = useTheme();
 
     // useEffect only runs on the client, so now we can safely show the UI
     useEffect(() => {
@@ -16,11 +16,15 @@ export default function ThemeToggle() {
         return <div style={{ width: 36, height: 36 }} />;
     }
 
-    const isDark = theme === 'dark';
+    // resolvedTheme gives us 'light' or 'dark' even if theme is 'system'
+    const isDark = resolvedTheme === 'dark';
 
     return (
         <button
-            onClick={() => setTheme(isDark ? 'light' : 'dark')}
+            onClick={() => {
+                const nextTheme = isDark ? 'light' : 'dark';
+                setTheme(nextTheme);
+            }}
             className="nav-link"
             style={{
                 background: 'transparent',
