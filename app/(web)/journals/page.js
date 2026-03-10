@@ -5,7 +5,7 @@ export const metadata = {
     title: '说说 - Journals',
 };
 
-export const revalidate = 60; // Regenerate every 60 seconds
+export const dynamic = 'force-dynamic'; // Skip static generation — too many sequential Notion API calls for build
 
 export default async function Journals() {
     const journalsData = await getJournalsData();

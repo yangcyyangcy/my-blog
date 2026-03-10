@@ -811,15 +811,79 @@ main {
 /* ------------------------------------
    Markdown Table Styles
 ------------------------------------ */
+
+/* Outer container: positions the fade hint overlay */
+.table-outer {
+  position: relative;
+  width: 100%;
+  margin: 2rem 0;
+  border-radius: var(--radius-md);
+}
+
+/* Scroll wrapper: contains table with horizontal scroll on mobile, full-width breakout on desktop */
+.table-scroll-wrapper {
+  width: 100%;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-sm);
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+}
+
+/* Fade hint overlay — created by JS, positioned over the right edge */
+.table-fade-hint {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  width: 40px;
+  background: linear-gradient(to left, var(--bg-primary) 0%, transparent 100%);
+  pointer-events: none;
+  border-radius: 0 var(--radius-md) var(--radius-md) 0;
+  opacity: 1;
+  transition: opacity 0.3s ease;
+  z-index: 2;
+}
+
+.table-fade-hint.hidden {
+  opacity: 0;
+}
+
+/* Desktop: break out of article container for full-width viewing */
+@media (min-width: 992px) {
+  .table-outer {
+    width: calc(100% + 8rem);
+    margin-left: -4rem;
+    margin-right: -4rem;
+  }
+
+  .table-scroll-wrapper {
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-md);
+  }
+
+  .table-fade-hint {
+    display: none;
+    /* No need for scroll hint on wide screens */
+  }
+}
+
+@media (min-width: 1400px) {
+  .table-outer {
+    width: calc(100% + 16rem);
+    margin-left: -8rem;
+    margin-right: -8rem;
+  }
+}
+
 .markdown-content table {
   width: 100%;
+  min-width: max-content;
   border-collapse: collapse;
-  margin: 2rem 0;
   font-size: 0.95rem;
-  border-radius: var(--radius-md);
-  overflow: hidden;
-  box-shadow: var(--shadow-sm);
-  border: 1px solid var(--border);
+  table-layout: auto;
+  margin: 0;
+  /* wrapper handles margin */
 }
 
 .markdown-content th {
@@ -827,9 +891,13 @@ main {
   color: var(--text-primary);
   font-weight: 700;
   text-align: left;
-  padding: 0.8rem 1.2rem;
+  padding: 0.85rem 1.2rem;
   border-bottom: 2px solid var(--border);
-  white-space: nowrap;
+  white-space: normal;
+  line-height: 1.5;
+  position: sticky;
+  top: 0;
+  z-index: 1;
 }
 
 .markdown-content td {
@@ -837,7 +905,8 @@ main {
   border-bottom: 1px solid var(--border);
   color: var(--text-secondary);
   vertical-align: top;
-  line-height: 1.6;
+  line-height: 1.7;
+  overflow-wrap: break-word;
 }
 
 .markdown-content tr:last-child td {
@@ -851,6 +920,36 @@ main {
 .markdown-content tr:hover td {
   background-color: var(--accent-light);
   transition: background-color 0.2s ease;
+}
+
+/* Mobile: tighter padding for table cells */
+@media (max-width: 640px) {
+  .markdown-content th {
+    padding: 0.65rem 0.8rem;
+    font-size: 0.85rem;
+  }
+
+  .markdown-content td {
+    padding: 0.6rem 0.8rem;
+    font-size: 0.9rem;
+  }
+}
+
+/* Skeleton Loading Animation */
+.skeleton-pulse {
+  animation: skeletonPulse 1.5s ease-in-out infinite;
+}
+
+@keyframes skeletonPulse {
+
+  0%,
+  100% {
+    opacity: 0.4;
+  }
+
+  50% {
+    opacity: 0.8;
+  }
 }
 
 
