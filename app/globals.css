@@ -1,80 +1,73 @@
 @import 'highlight.js/styles/github-dark.css';
 
 :root {
-  /* Dynamic Gradients & Aesthetic Colors - Light Mode (Slate Theme) */
-  --bg-primary: #f8fafc;
-  /* Slate 50 - Very soft off-white */
-  --bg-secondary: #f1f5f9;
-  /* Slate 100 */
-  --bg-subtle: #e2e8f0;
-  /* Slate 200 */
+  /* Apple-inspired Modern Design Tokens (Light Mode) */
+  --bg-primary: #fbfbfd;
+  --bg-secondary: #ffffff;
+  --bg-subtle: #f5f5f7;
 
-  --text-primary: #0f172a;
-  /* Slate 900 - Soft Black */
-  --text-secondary: #334155;
-  /* Slate 700 */
-  --text-muted: #64748b;
-  /* Slate 500 */
+  --text-primary: #1d1d1f;
+  --text-secondary: #86868b;
+  --text-muted: #86868b;
 
-  --accent: #3b82f6;
-  /* Blue 500 */
-  --accent-hover: #2563eb;
-  /* Blue 600 */
-  --accent-light: rgba(59, 130, 246, 0.15);
-  --accent-gradient: linear-gradient(135deg, #3b82f6 0%, #8b5cf6 100%);
+  --accent: #0066cc;
+  /* Apple Blue */
+  --accent-hover: #0077ed;
+  --accent-light: rgba(0, 102, 204, 0.08);
+  --accent-gradient: linear-gradient(135deg, #0066cc 0%, #3b82f6 100%);
 
-  --border: rgba(15, 23, 42, 0.1);
-  --border-hover: rgba(15, 23, 42, 0.2);
+  --border: rgba(0, 0, 0, 0.08);
+  --border-hover: rgba(0, 0, 0, 0.15);
 
   /* Glassmorphism - Light Mode */
-  --glass-bg: rgba(255, 255, 255, 0.85);
-  --glass-border: rgba(255, 255, 255, 0.9);
-  --glass-shadow: 0 8px 32px rgba(15, 23, 42, 0.08);
+  --glass-bg: rgba(251, 251, 253, 0.72);
+  --glass-border: rgba(0, 0, 0, 0.05);
+  --glass-shadow: 0 8px 32px rgba(0, 0, 0, 0.04);
 
   /* Typography */
   --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
   --font-mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
 
   /* Spacing & Sizes */
-  --container-width: 800px;
-  --nav-height: 72px;
+  --container-width: 720px;
+  /* narrowed for better reading experience */
+  --nav-height: 56px;
+  /* slightly thinner */
   --radius-sm: 8px;
-  --radius-md: 16px;
-  --radius-lg: 24px;
+  --radius-md: 12px;
+  --radius-lg: 18px;
 
   /* Utilities */
-  --transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
-  --shadow-sm: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -1px rgba(0, 0, 0, 0.03);
-  --shadow-md: 0 10px 15px -3px rgba(0, 0, 0, 0.05), 0 4px 6px -2px rgba(0, 0, 0, 0.03);
-  --shadow-lg: 0 20px 25px -5px rgba(0, 0, 0, 0.05), 0 10px 10px -5px rgba(0, 0, 0, 0.02);
+  --transition: all 0.3s cubic-bezier(0.25, 0.1, 0.25, 1);
+  --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.04);
+  --shadow-md: 0 4px 16px rgba(0, 0, 0, 0.06);
+  --shadow-lg: 0 8px 32px rgba(0, 0, 0, 0.08);
 }
 
-[data-theme="dark"] {
-  :root {
-    --bg-primary: #020617;
-    /* Slate 950 */
-    --bg-secondary: #0f172a;
-    /* Slate 900 */
-    --bg-subtle: #1e293b;
-    /* Slate 800 */
+.dark {
+  /* Apple-inspired Modern Design Tokens (Dark Mode) */
+  --bg-primary: #000000;
+  /* True black */
+  --bg-secondary: #161617;
+  --bg-subtle: #1c1c1e;
 
-    --text-primary: #f8fafc;
-    --text-secondary: #cbd5e1;
-    --text-muted: #64748b;
+  --text-primary: #f5f5f7;
+  --text-secondary: #86868b;
+  --text-muted: #86868b;
 
-    --accent: #60a5fa;
-    --accent-hover: #93c5fd;
-    --accent-light: rgba(96, 165, 250, 0.15);
-    --accent-gradient: linear-gradient(135deg, #60a5fa 0%, #a78bfa 100%);
+  --accent: #2997ff;
+  /* Dark mode blue */
+  --accent-hover: #147ce5;
+  --accent-light: rgba(41, 151, 255, 0.15);
+  --accent-gradient: linear-gradient(135deg, #2997ff 0%, #0077ed 100%);
 
-    --border: rgba(255, 255, 255, 0.08);
-    --border-hover: rgba(255, 255, 255, 0.15);
+  --border: rgba(255, 255, 255, 0.12);
+  --border-hover: rgba(255, 255, 255, 0.18);
 
-    /* Dark Glassmorphism */
-    --glass-bg: rgba(15, 23, 42, 0.65);
-    --glass-border: rgba(255, 255, 255, 0.05);
-    --glass-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
-  }
+  /* Dark Glassmorphism */
+  --glass-bg: rgba(0, 0, 0, 0.72);
+  --glass-border: rgba(255, 255, 255, 0.08);
+  --glass-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
 }
 
 * {
@@ -83,31 +76,27 @@
   padding: 0;
 }
 
-/* Base Body with Grid Background Pattern */
+/* Base Body */
 body {
   font-family: var(--font-sans);
   background-color: var(--bg-primary);
   color: var(--text-primary);
-  line-height: 1.7;
+  line-height: 1.6;
   transition: background-color 0.4s ease, color 0.4s ease;
   min-height: 100vh;
   display: flex;
   flex-direction: column;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 
-  /* Subtle mesh/grid gradient background */
-  background-image:
-    radial-gradient(at 0% 0%, var(--accent-light) 0px, transparent 50%),
-    radial-gradient(at 100% 100%, rgba(139, 92, 246, 0.05) 0px, transparent 50%);
   background-attachment: fixed;
   overflow-x: hidden;
 }
 
-@media (prefers-color-scheme: dark) {
-  body {
-    background-image:
-      radial-gradient(at 20% 0%, rgba(59, 130, 246, 0.15) 0px, transparent 50%),
-      radial-gradient(at 80% 100%, rgba(167, 139, 250, 0.1) 0px, transparent 50%);
-  }
+.dark body {
+  background-image:
+    radial-gradient(at 20% 0%, rgba(59, 130, 246, 0.15) 0px, transparent 50%),
+    radial-gradient(at 80% 100%, rgba(167, 139, 250, 0.1) 0px, transparent 50%);
 }
 
 a {
@@ -141,7 +130,17 @@ ul {
 main {
   flex: 1;
   padding-bottom: 6rem;
-  animation: pageFadeIn 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  animation: fadeInOpacity 0.8s ease-in forwards;
+}
+
+@keyframes fadeInOpacity {
+  0% {
+    opacity: 0;
+  }
+
+  100% {
+    opacity: 1;
+  }
 }
 
 /* Two-column layout grid - Mobile First Strategy */
@@ -163,18 +162,71 @@ main {
   width: 100%;
 }
 
+/* Post Layout grid - Mobile First Strategy */
+.post-layout-wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.post-main-content {
+  flex: 1;
+  min-width: 0;
+  width: 100%;
+}
+
+.post-sidebar {
+  width: 100%;
+}
+
 @media (min-width: 992px) {
   .layout-wrapper {
     flex-direction: row;
-    gap: 2rem;
+    gap: 4rem;
     align-items: flex-start;
+    justify-content: center;
+  }
+
+  .main-content {
+    max-width: var(--container-width);
   }
 
   .sidebar {
-    width: 300px;
+    width: 240px;
     flex-shrink: 0;
     position: sticky;
-    top: calc(var(--nav-height) + 2rem);
+    top: calc(var(--nav-height) + 4rem);
+  }
+
+  /* Specific Layout for Blog Posts (Centered article with docked TOC) */
+  .post-layout-wrapper {
+    display: flex;
+    flex-direction: row;
+    position: relative;
+    padding-top: 2rem;
+    justify-content: center;
+    gap: 4rem;
+  }
+
+  .post-main-content {
+    /* Don't force margin auto, let flex center it */
+    max-width: var(--container-width);
+    flex-shrink: 0;
+  }
+
+  .post-sidebar {
+    position: fixed;
+    right: 1.5rem;
+    /* moved slightly away from right edge to avoid scrollbars */
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 50;
+    display: flex;
+    justify-content: flex-end;
+    height: 66vh;
+    /* occupies roughly 2/3 of the screen */
   }
 }
 
@@ -190,47 +242,44 @@ main {
   }
 }
 
-/* Floating Header - Redesigned to be transparent and absolute at top */
+/* Floating Header - Redesigned to be glassy and fixed at top */
 .header {
-  position: absolute;
-  /* Scrolls away with the page naturally */
+  position: fixed;
   top: 0;
   left: 0;
   width: 100%;
   height: var(--nav-height);
 
-  /* Transparent background */
-  background-color: transparent;
-  border-bottom: none;
-  box-shadow: none;
+  /* Apple-style Glassmorphism background */
+  background-color: var(--glass-bg);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border-bottom: 1px solid var(--glass-border);
+  box-shadow: var(--glass-shadow);
 
   z-index: 100;
   display: flex;
   align-items: center;
 
-  /* Initial state for fade-in */
-  opacity: 0;
-  transition: opacity 0.5s ease-in-out;
+  transition: all 0.3s ease-in-out;
 }
 
-/* --- Table of Contents Styles --- */
+
 .toc-container {
-  padding: 1.5rem;
-  background-color: var(--bg-secondary);
-  border: 1px solid var(--border);
-  border-radius: var(--radius-lg);
-  box-shadow: var(--shadow-sm);
-  max-height: calc(100vh - var(--nav-height) - 4rem);
+  padding: 1rem 0;
+  height: 100%;
+  /* take full height of the 66vh sidebar */
   overflow-y: auto;
+  scrollbar-width: none;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  /* keep the list vertically centered within container */
+  background: transparent;
 }
 
-.toc-title {
-  font-size: 1rem;
-  font-weight: 700;
-  margin-bottom: 1rem;
-  color: var(--text-primary);
-  text-transform: uppercase;
-  letter-spacing: 0.05em;
+.toc-container::-webkit-scrollbar {
+  display: none;
 }
 
 .toc-list {
@@ -239,44 +288,95 @@ main {
   margin: 0;
   display: flex;
   flex-direction: column;
-  gap: 0.5rem;
+  gap: 8px;
+  align-items: flex-end;
+  /* Lines align right */
 }
 
+/* Base link layout: Text hidden, line visible */
 .toc-link {
-  display: block;
-  font-size: 0.9rem;
-  color: var(--text-secondary);
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
   text-decoration: none;
-  transition: var(--transition);
+  min-height: 20px;
+  cursor: pointer;
+  width: 100%;
+}
+
+.toc-text {
+  font-size: 0.85rem;
+  color: var(--text-muted);
+  white-space: normal;
+  text-align: left;
   line-height: 1.4;
-  padding: 0.2rem 0;
+  word-break: break-word;
+
+  /* Hidden state */
+  opacity: 0;
+  width: 0;
+  max-height: 0;
+  /* Prevents height explosion from 0-width text wrap */
+  transform: translateX(10px);
+  transition: all 0.3s cubic-bezier(0.25, 0.1, 0.25, 1);
+  overflow: hidden;
+  user-select: none;
+  padding-left: 2ch;
 }
 
-.toc-link:hover {
-  color: var(--accent);
-}
-
-.toc-link.active {
-  color: var(--accent);
-  font-weight: 600;
-  position: relative;
-}
-
-.toc-link.active::before {
-  content: '';
-  position: absolute;
-  left: -1.5rem;
-  top: 50%;
-  transform: translateY(-50%);
-  width: 4px;
-  height: 16px;
-  background-color: var(--accent);
-  border-radius: 2px;
-}
-
-.header.fade-in {
+/* Hovering the ENTIRE container area expands ALL text AND hides lines */
+.toc-container:hover .toc-text {
   opacity: 1;
+  width: 250px;
+  max-height: 150px;
+  /* Allows text to wrap up to ~7 lines */
+  transform: translateX(0);
+  margin-right: 16px;
 }
+
+.toc-container:hover .toc-line {
+  opacity: 0;
+  width: 0 !important;
+  margin: 0;
+}
+
+.toc-link:hover .toc-text {
+  color: var(--text-primary);
+}
+
+.toc-link.active .toc-text {
+  color: var(--text-primary);
+  font-weight: 500;
+}
+
+/* The horizontal line indicator */
+.toc-line {
+  /* Uniform short dashes matching the reference image */
+  width: 14px;
+  height: 3px;
+  background-color: var(--text-muted);
+  /* explicitly grey */
+  opacity: 0.3;
+  /* subtle inactive state */
+  border-radius: 2px;
+  transition: all 0.3s ease;
+  flex-shrink: 0;
+  margin-right: 16px;
+}
+
+.toc-link:hover .toc-line {
+  background-color: var(--text-muted);
+  opacity: 0.8;
+  /* more visible grey on hover */
+}
+
+.toc-link.active .toc-line {
+  background-color: var(--text-primary);
+  opacity: 1;
+  /* full solid color on active */
+}
+
+
 
 .header-container {
   display: grid;
@@ -696,6 +796,79 @@ main {
   opacity: 1;
 }
 
+/* Theme Toggle - Apple Style Pill Switch */
+.theme-toggle {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 52px;
+  height: 28px;
+  padding: 4px;
+  border-radius: 14px;
+  background-color: var(--border);
+  border: 1px solid var(--glass-border);
+  cursor: pointer;
+  box-shadow: inset 0 1px 4px rgba(0, 0, 0, 0.05);
+  transition: background-color 0.3s ease;
+  overflow: hidden;
+  margin-left: 0.5rem;
+}
+
+.theme-toggle:hover {
+  background-color: var(--border-hover);
+}
+
+.theme-toggle-skeleton {
+  width: 52px;
+  height: 28px;
+  border-radius: 14px;
+  background-color: var(--border);
+  opacity: 0.5;
+  margin-left: 0.5rem;
+}
+
+/* The sliding thumb */
+.toggle-thumb {
+  position: absolute;
+  top: 3px;
+  left: 3px;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background-color: var(--bg-primary);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.15);
+  transition: transform 0.4s cubic-bezier(0.25, 0.1, 0.25, 1);
+  z-index: 1;
+}
+
+.theme-toggle.dark .toggle-thumb {
+  transform: translateX(24px);
+  /* slide to moon side */
+}
+
+/* The icons */
+.toggle-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 20px;
+  height: 20px;
+  z-index: 2;
+  /* keep above the thumb */
+  color: var(--text-secondary);
+  transition: color 0.3s;
+}
+
+.theme-toggle.light .toggle-icon.sun {
+  color: var(--text-primary);
+}
+
+.theme-toggle.dark .toggle-icon.moon {
+  color: #fff;
+  /* Deep contrast moon icon when active */
+}
+
 .post-card-content {
   position: relative;
   z-index: 1;
@@ -781,10 +954,12 @@ main {
 }
 
 .article-title {
-  font-size: clamp(2rem, 6vw, 3rem);
-  font-weight: 800;
-  letter-spacing: -0.04em;
-  line-height: 1.2;
+  font-size: clamp(2.2rem, 6vw, 3.2rem);
+  font-weight: 700;
+  /* Slightly less heavy than 800 for elegance */
+  letter-spacing: -0.035em;
+  /* Apple-like tight tracking */
+  line-height: 1.15;
   margin-bottom: 1.5rem;
   color: var(--text-primary);
 }
@@ -810,11 +985,16 @@ main {
   color: var(--text-primary);
   margin-bottom: 2rem;
   font-size: clamp(1.05rem, 2vw, 1.15rem);
-  line-height: 1.85;
+  line-height: 1.7;
+  /* Optimized for readability without feeling too disconnected */
+  letter-spacing: -0.01em;
+  /* Subtle modern tracking */
 }
 
 .markdown-content h2 {
-  font-size: clamp(1.5rem, 4vw, 2rem);
+  font-size: clamp(1.6rem, 4vw, 2.1rem);
+  font-weight: 600;
+  letter-spacing: -0.02em;
   margin-top: 3.5rem;
   margin-bottom: 1.5rem;
   padding-bottom: 0.5rem;
@@ -822,7 +1002,9 @@ main {
 }
 
 .markdown-content h3 {
-  font-size: 1.5rem;
+  font-size: 1.4rem;
+  font-weight: 600;
+  letter-spacing: -0.01em;
   margin-top: 2.5rem;
   margin-bottom: 1.25rem;
 }

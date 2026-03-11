@@ -39,7 +39,7 @@ export default function Navigation() {
 
     return (
         <>
-            <header className={`header ${isAtTop ? 'fade-in' : ''} ${isInverted ? 'nav-inverted' : ''}`}>
+            <header className={`header ${isInverted ? 'nav-inverted' : ''}`}>
                 <div className="header-container">
                     <Link href="/" className="logo">
                         yancey
